@@ -1,4 +1,4 @@
-package Main;
+package GUI.Main;
 
 import GUI.Book_GUI;
 import GUI.NXB_GUI;
