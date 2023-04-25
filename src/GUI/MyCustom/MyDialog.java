@@ -2,7 +2,7 @@ package GUI.MyCustom;
 
 import javax.swing.*;
 
-import com.raven.main.Main;
+import Main.Main;
 
 import java.awt.*;
 import java.awt.event.*;
