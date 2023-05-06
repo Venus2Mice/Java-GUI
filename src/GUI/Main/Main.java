@@ -1,11 +1,14 @@
 package GUI.Main;
 
+import GUI.Account_GUI;
 import GUI.Book_GUI;
 import GUI.NXB_GUI;
 import GUI.MyCustom.event.EventMenuSelected;
 import GUI.MyCustom.form.Form_2;
 import GUI.MyCustom.form.Form_3;
 import GUI.MyCustom.form.Dashboard;
+import GUI.Staff_GUI;
+import GUI.Order_GUI;
 import java.awt.Color;
 import javax.swing.JComponent;
 
@@ -16,6 +19,9 @@ public class Main extends javax.swing.JFrame {
     private Form_3 form3;
     private NXB_GUI formNXB;
     private Book_GUI formBook;
+    private Staff_GUI formStaff;
+    private Order_GUI formOrder;
+    private Account_GUI formAccount;
 
     public Main() {
         initComponents();
@@ -25,6 +31,9 @@ public class Main extends javax.swing.JFrame {
         form3 = new Form_3();
         formNXB = new NXB_GUI();
         formBook = new Book_GUI();
+        formStaff = new Staff_GUI();
+        formOrder = new Order_GUI();
+        formAccount = new Account_GUI();
         pnMenu.initMoving(Main.this);
         pnMenu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -40,7 +49,13 @@ public class Main extends javax.swing.JFrame {
                         setForm(formNXB);
                         break;
                     case 4:
-                        setForm(form3);
+                        setForm(formStaff);
+                        break;
+                    case 5:
+                        setForm(formOrder);
+                        break;
+                    case 6:
+                        setForm(formAccount);
                         break;
                     default : setForm(form2);
                 }
