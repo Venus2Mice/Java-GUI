@@ -19,8 +19,10 @@ CREATE TABLE `quyen`
 	`id_quyen` INT AUTO_INCREMENT,
 	`crud_user` BIT NOT NULL DEFAULT 0,
 	`crud_book` BIT NOT NULL DEFAULT 0,
-	`curd_muontra` BIT NOT NULL DEFAULT 0,
+	`crud_nxb` BIT NOT NULL DEFAULT 0,
+	`crud_quyen` BIT NOT NULL DEFAULT 0,
 	`crud_thethuvien` BIT NOT NULL DEFAULT 0,
+	`curd_muontra` BIT NOT NULL DEFAULT 0,
     PRIMARY KEY (`id_quyen`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

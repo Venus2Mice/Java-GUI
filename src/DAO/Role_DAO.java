@@ -24,6 +24,8 @@ public class Role_DAO {
                 r.setCrud_book(rs.getBoolean("crud_book"));
                 r.setCrud_orders(rs.getBoolean("crud_muontra"));
                 r.setCrud_cardlib(rs.getBoolean("crud_thethuvien"));
+                r.setCrud_nxb(rs.getBoolean("crud_nxb"));
+                r.setCrud_role(rs.getBoolean("crud_quyen"));
                 Rolelist.add(r);
             }
         } catch (SQLException ex) {

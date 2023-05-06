@@ -4,8 +4,26 @@ public class Role_DTO {
     private int role_id;
     private boolean crud_user;
     private boolean crud_book;
-    private boolean crud_orders;
+    private boolean crud_nxb;
     private boolean crud_cardlib;
+    private boolean crud_orders;
+    private boolean crud_role;
+
+    public boolean isCrud_nxb() {
+        return crud_nxb;
+    }
+
+    public void setCrud_nxb(boolean crud_nxb) {
+        this.crud_nxb = crud_nxb;
+    }
+
+    public boolean isCrud_role() {
+        return crud_role;
+    }
+
+    public void setCrud_role(boolean crud_role) {
+        this.crud_role = crud_role;
+    }
 
     public int getRole_id() {
         return role_id;

@@ -19,6 +19,7 @@ import java.awt.event.MouseListener;
 
 import DTO.Book_DTO;
 import DTO.Publisher_DTO;
+import GUI.MyCustom.MyDialog;
 import GUI.MyCustom.MyTable;
 import GUI.MyCustom.TransparentPanel;
 import BUS.Book_BUS;
@@ -177,6 +178,7 @@ public class Book_GUI extends javax.swing.JPanel {
         pnTextFiledRight.add(pnStatus);
 
         Dimension lbSize = new Dimension(125, 40);
+        Dimension cmbSize = new Dimension(200, 40);
         lbISBN.setPreferredSize(lbSize);
         lbName.setPreferredSize(lbSize);
         lbCategory.setPreferredSize(lbSize);
@@ -186,7 +188,8 @@ public class Book_GUI extends javax.swing.JPanel {
         lbEdition.setPreferredSize(lbSize);
         lbAmount.setPreferredSize(lbSize);
         lbStatus.setPreferredSize(lbSize);
-        cmbStatus.setPreferredSize(lbSize);
+        cmbStatus.setPreferredSize(cmbSize);
+        cmbNXB.setPreferredSize(cmbSize);
 
         pnTop.add(pnTextFiledLeft, BorderLayout.WEST);
         pnTop.add(pnTextFiledRight, BorderLayout.EAST);
@@ -383,28 +386,46 @@ public class Book_GUI extends javax.swing.JPanel {
     }
 
     private void eventAddBook() {
-        String pub_id = pub.findByName(cmbNXB.getSelectedItem() + "").getPubliser_id() + "";
+        Publisher_DTO p = pub.findByName(cmbNXB.getSelectedItem() + "");
+        String status = cmbStatus.getSelectedItem() + "";
+        if(p==null || status.equals("Chọn status")){
+            new MyDialog("Không thêm được!", MyDialog.ERROR_DIALOG);
+            return ;
+        }
+        String pub_id = p.getPubliser_id() + "";
         Book_DTO b = Book_BUS.initBook(txtISBN.getText(), txtName.getText(), txtCategory.getText(),
                 txtAuthors.getText(), pub_id, txtEdition.getText(), txtNamXuatBan.getText(),
-                txtAmount.getText(), cmbStatus.getSelectedItem() + "");
+                txtAmount.getText(), status);
         if (Book_BUS.addBook(b))
             btnReset.doClick();
     }
 
     private void eventUpdateBook() {
-        String pub_id = pub.findByName(cmbNXB.getSelectedItem() + "").getPubliser_id() + "";
+        Publisher_DTO p = pub.findByName(cmbNXB.getSelectedItem() + "");
+        String status = cmbStatus.getSelectedItem() + "";
+        if(p==null || status.equals("Chọn status")){
+            new MyDialog("Không sửa được!", MyDialog.ERROR_DIALOG);
+            return ;
+        }
+        String pub_id = p.getPubliser_id() + "";
         Book_DTO b = Book_BUS.initBook(txtISBN.getText(), txtName.getText(), txtCategory.getText(),
                 txtAuthors.getText(), pub_id, txtEdition.getText(), txtNamXuatBan.getText(),
-                txtAmount.getText(), cmbStatus.getSelectedItem() + "");
+                txtAmount.getText(), status);
         if (Book_BUS.updateBook(b))
             btnReset.doClick();
     }
 
     private void eventDeleteBook() {
-        String pub_id = pub.findByName(cmbNXB.getSelectedItem() + "").getPubliser_id() + "";
+        Publisher_DTO p = pub.findByName(cmbNXB.getSelectedItem() + "");
+        String status = cmbStatus.getSelectedItem() + "";
+        if(p==null || status.equals("Chọn status")){
+            new MyDialog("Không xóa được!", MyDialog.ERROR_DIALOG);
+            return ;
+        }
+        String pub_id = p.getPubliser_id() + "";
         Book_DTO b = Book_BUS.initBook(txtISBN.getText(), txtName.getText(), txtCategory.getText(),
                 txtAuthors.getText(), pub_id, txtEdition.getText(), txtNamXuatBan.getText(),
-                txtAmount.getText(), cmbStatus.getSelectedItem() + "");
+                txtAmount.getText(), status);
         if (Book_BUS.deleteBook(b))
             btnReset.doClick();
     }
