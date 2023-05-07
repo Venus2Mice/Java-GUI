@@ -35,14 +35,13 @@ public class LibCard_DAO {
 
     public boolean addLibCard(LibCard_DTO c) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`the_thuvien` VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`the_thuvien` VALUES(?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setInt(1, c.getCard_id());
-            pstmt.setDate(2, c.getDay_init());
-            pstmt.setDate(3, c.getExp_date());
-            pstmt.setString(4, c.getDesc());
-            pstmt.setString(5, c.getName());
-            pstmt.setInt(6, c.getPhone());
+            pstmt.setDate(1, c.getDay_init());
+            pstmt.setDate(2, c.getExp_date());
+            pstmt.setString(3, c.getDesc());
+            pstmt.setString(4, c.getName());
+            pstmt.setInt(5, c.getPhone());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
