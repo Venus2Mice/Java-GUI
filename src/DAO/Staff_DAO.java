@@ -60,7 +60,7 @@ public class Staff_DAO {
                 Staff_DTO s = new Staff_DTO();
                 s.setId_staff(rs.getInt("id_nv"));
                 s.setStaff_name(rs.getString("ten_nv"));
-                s.setBrith(rs.getDate("BIRTH"));
+                s.setBrith(rs.getDate("ngay_sinh"));
                 s.setPhone(rs.getInt("phone"));
                 s.setGroup_name(rs.getString("ten_nhom"));
                 s.setUsername(rs.getString("username"));

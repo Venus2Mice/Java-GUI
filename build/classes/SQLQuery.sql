@@ -54,7 +54,7 @@ CREATE TABLE `nhan_vien`
 	`id_nv` INT AUTO_INCREMENT,
 	`ten_nv` varchar(32) CHARACTER SET utf8 NOT NULL,
 	`ngay_sinh` DATE NOT NULL,
-	`phone` INT(11) NOT NULL,
+	`phone` varchar(32) CHARACTER SET utf8 NOT NULL,
 	`ten_nhom` varchar(32) CHARACTER SET utf8 NOT NULL ,
 	`username` varchar(32) CHARACTER SET utf8 NOT NULL,
 	`password` varchar(32) CHARACTER SET utf8 NOT NULL,

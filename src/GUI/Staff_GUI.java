@@ -2,19 +2,33 @@ package GUI;
 
 import BUS.Staff_BUS;
 import DTO.Staff_DTO;
+import GUI.MyCustom.MyTable;
 import GUI.MyCustom.datechooser.DateChooser;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class Staff_GUI extends javax.swing.JPanel {
     public Staff_GUI() {
         initComponents();
     }
+
+    DefaultTableModel dtmStaff = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    MyTable tbStaff;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,8 +37,6 @@ public class Staff_GUI extends javax.swing.JPanel {
         pnStaffMenu = new javax.swing.JPanel();
         pnTop = new javax.swing.JPanel();
         lbTitle = new javax.swing.JLabel();
-        scrTbStaff = new javax.swing.JScrollPane();
-        tbStaff = new javax.swing.JTable();
         Them = new javax.swing.JButton();
         Xoa = new javax.swing.JButton();
         Sua = new javax.swing.JButton();
@@ -43,6 +55,19 @@ public class Staff_GUI extends javax.swing.JPanel {
         datechooseBirth.setDateFormat("yyyy-MM-dd");
         datechooseBirth.setTextRefernce(txtBirth);
 
+        dtmStaff.addColumn("Mã NV");
+        dtmStaff.addColumn("Tên NV");
+        dtmStaff.addColumn("Ngày Sinh");
+        dtmStaff.addColumn("SĐT");
+        dtmStaff.addColumn("Tên Nhóm");
+        dtmStaff.addColumn("Tên đăng nhặp");
+        dtmStaff.addColumn("password");
+        dtmStaff.addColumn("status");
+
+        tbStaff = new MyTable(dtmStaff);
+
+        scrTbStaff = new javax.swing.JScrollPane(tbStaff);
+
         setPreferredSize(new java.awt.Dimension(915, 600));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
@@ -53,24 +78,7 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbTitle.setText("QUẢN LÝ NHÂN VIÊN");
-
-        tbStaff.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã nhân viên", "Tên", "Ngày sinh", "Điện thoại", "Nhóm", "Tài khoản", "Mật khẩu"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        scrTbStaff.setViewportView(tbStaff);
+        
 
         Them.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Them.setText("Thêm");
@@ -221,8 +229,8 @@ public class Staff_GUI extends javax.swing.JPanel {
                         .addComponent(Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
-
         add(pnTop);
+        loadData();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
@@ -245,6 +253,26 @@ public class Staff_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TimActionPerformed
 
+    private void loadData(){
+        staff_BUS = new Staff_BUS();
+        loadData(staff_BUS.getAllStaff());
+    }
+
+    private void loadData(List<Staff_DTO> listitem){
+        dtmStaff.setRowCount(0);
+        for(Staff_DTO s : listitem){
+            Vector vec = new Vector();
+            vec.add(s.getId_staff());
+            vec.add(s.getStaff_name());
+            vec.add(s.getBrith());
+            vec.add(s.getPhone());
+            vec.add(s.getGroup_name());
+            vec.add(s.getUsername());
+            vec.add(s.getPassword());
+            vec.add(s.isActive());
+            dtmStaff.addRow(vec);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sua;
@@ -260,12 +288,12 @@ public class Staff_GUI extends javax.swing.JPanel {
     private javax.swing.JPanel pnStaffMenu;
     private javax.swing.JPanel pnTop;
     private javax.swing.JScrollPane scrTbStaff;
-    private javax.swing.JTable tbStaff;
     private javax.swing.JTextField txtBirth;
     private GUI.MyCustom.swing.Input txtKey;
     private GUI.MyCustom.swing.Input txtName;
     private GUI.MyCustom.swing.Input txtPassword;
     private GUI.MyCustom.swing.Input txtPhone;
     private GUI.MyCustom.swing.Input txtUsername;
+    private Staff_BUS staff_BUS;
     // End of variables declaration//GEN-END:variables
 }
