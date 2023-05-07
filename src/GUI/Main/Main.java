@@ -1,6 +1,6 @@
 package GUI.Main;
 
-import GUI.Account_GUI;
+import GUI.Libary_Card_GUI;
 import GUI.Book_GUI;
 import GUI.NXB_GUI;
 import GUI.MyCustom.event.EventMenuSelected;
@@ -21,7 +21,7 @@ public class Main extends javax.swing.JFrame {
     private Book_GUI formBook;
     private Staff_GUI formStaff;
     private Order_GUI formOrder;
-    private Account_GUI formAccount;
+    private Libary_Card_GUI formAccount;
 
     public Main() {
         initComponents();
@@ -33,7 +33,7 @@ public class Main extends javax.swing.JFrame {
         formBook = new Book_GUI();
         formStaff = new Staff_GUI();
         formOrder = new Order_GUI();
-        formAccount = new Account_GUI();
+        formAccount = new Libary_Card_GUI();
         pnMenu.initMoving(Main.this);
         pnMenu.addEventMenuSelected(new EventMenuSelected() {
             @Override

@@ -34,8 +34,8 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("2", "Sách", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Nhà Xuất Bản", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("4", "Nhân viên", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("5", "Mượn trả", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("6", "Tài khoản", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("5", "QL mượn trả", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("6", "Thẻ thư viện", Model_Menu.MenuType.MENU));
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

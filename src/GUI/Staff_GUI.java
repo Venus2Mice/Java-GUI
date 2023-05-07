@@ -14,64 +14,47 @@ import javax.swing.JTextField;
 public class Staff_GUI extends javax.swing.JPanel {
     public Staff_GUI() {
         initComponents();
-        input1.setLabelText(" HỌ VÀ TÊN");
-        input3.setLabelText(" NGÀY SINH");
-        input4.setLabelText("ĐIỆN THOẠI");
-        input5.setLabelText(" TÊN NHÓM");
-        input6.setLabelText("TÀI KHOẢN");
-        input7.setLabelText(" MẬT KHẨU");
-        input2.setLabelText("Nhập từ khoá");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        dateChooser1 = new GUI.MyCustom.datechooser.DateChooser();
+        datechooseBirth = new GUI.MyCustom.datechooser.DateChooser();
         pnStaffMenu = new javax.swing.JPanel();
         pnTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lbTitle = new javax.swing.JLabel();
+        scrTbStaff = new javax.swing.JScrollPane();
+        tbStaff = new javax.swing.JTable();
         Them = new javax.swing.JButton();
         Xoa = new javax.swing.JButton();
         Sua = new javax.swing.JButton();
-        input1 = new GUI.MyCustom.swing.Input();
-        input3 = new GUI.MyCustom.swing.Input();
-        input4 = new GUI.MyCustom.swing.Input();
-        input5 = new GUI.MyCustom.swing.Input();
-        input6 = new GUI.MyCustom.swing.Input();
-        input7 = new GUI.MyCustom.swing.Input();
-        input2 = new GUI.MyCustom.swing.Input();
+        txtName = new GUI.MyCustom.swing.Input();
+        txtPhone = new GUI.MyCustom.swing.Input();
+        txtUsername = new GUI.MyCustom.swing.Input();
+        txtPassword = new GUI.MyCustom.swing.Input();
+        txtKey = new GUI.MyCustom.swing.Input();
         Tim = new javax.swing.JButton();
-        Reset = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        cmbGroup = new javax.swing.JComboBox<>();
+        lbCbGroup = new javax.swing.JLabel();
+        lbBirth = new javax.swing.JLabel();
+        txtBirth = new javax.swing.JTextField();
 
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        datechooseBirth.setDateFormat("yyyy-MM-dd");
+        datechooseBirth.setTextRefernce(txtBirth);
 
-    final Color colorPanel = new Color(247, 247, 247);
-    JButton btnReset;
-    JButton btnAdd;
-    JButton btnUpdate, btnDel, btnSearch;
-    JTextField txtSearch;
-    JTextField txtISBN, txtName, txtCategory, txtAuthors, txtEdition, txtNamXuatBan, txtAmount;
-    JComboBox<String> cmbStatus;
-    JComboBox<String> cmbNXB;
-    DateChooser Namxuatban;
+        setPreferredSize(new java.awt.Dimension(915, 600));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         pnStaffMenu.setLayout(new javax.swing.BoxLayout(pnStaffMenu, javax.swing.BoxLayout.Y_AXIS));
         add(pnStaffMenu);
 
         pnTop.setBackground(new java.awt.Color(247, 247, 247));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbTitle.setText("QUẢN LÝ NHÂN VIÊN");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -87,7 +70,7 @@ public class Staff_GUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        scrTbStaff.setViewportView(tbStaff);
 
         Them.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Them.setText("Thêm");
@@ -113,6 +96,16 @@ public class Staff_GUI extends javax.swing.JPanel {
             }
         });
 
+        txtName.setLabelText("Họ tên");
+
+        txtPhone.setLabelText("SĐT");
+
+        txtUsername.setLabelText("TK login");
+
+        txtPassword.setLabelText("Password");
+
+        txtKey.setLabelText("Từ khóa cần tìm");
+
         Tim.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Tim.setText("Tìm");
         Tim.addActionListener(new java.awt.event.ActionListener() {
@@ -121,51 +114,66 @@ public class Staff_GUI extends javax.swing.JPanel {
             }
         });
 
-        Reset.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Reset.setText("Reset");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
+        btnReset.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
+
+        cmbGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lbCbGroup.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbCbGroup.setText("Nhóm");
+
+        lbBirth.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbBirth.setText("Ngày sinh");
 
         javax.swing.GroupLayout pnTopLayout = new javax.swing.GroupLayout(pnTop);
         pnTop.setLayout(pnTopLayout);
         pnTopLayout.setHorizontalGroup(
             pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(scrTbStaff)
             .addGroup(pnTopLayout.createSequentialGroup()
                 .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnTopLayout.createSequentialGroup()
                         .addGap(341, 341, 341)
-                        .addComponent(jLabel1)
-                        .addGap(107, 107, 107)
-                        .addComponent(Reset)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lbTitle)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 166, Short.MAX_VALUE))
                     .addGroup(pnTopLayout.createSequentialGroup()
-                        .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnTopLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Them, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
-                                .addComponent(Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(pnTopLayout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(input1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(input4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)))
-                        .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(input5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(input6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(input7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnTopLayout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnTopLayout.createSequentialGroup()
+                                        .addComponent(lbBirth)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTopLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(lbCbGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(68, 68, 68))
             .addGroup(pnTopLayout.createSequentialGroup()
                 .addGap(271, 271, 271)
-                .addComponent(input2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -174,22 +182,30 @@ public class Staff_GUI extends javax.swing.JPanel {
             pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnTopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pnTopLayout.createSequentialGroup()
-                        .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Reset))
+                        .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1, 1, 1))
+                    .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnTopLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(cmbGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTopLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(input1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(input5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbCbGroup, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(input3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(input6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbBirth)
+                        .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(input4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(input7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Them, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,9 +214,9 @@ public class Staff_GUI extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(pnTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnTopLayout.createSequentialGroup()
-                        .addComponent(input2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                        .addComponent(scrTbStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
                     .addGroup(pnTopLayout.createSequentialGroup()
                         .addComponent(Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -208,10 +224,6 @@ public class Staff_GUI extends javax.swing.JPanel {
 
         add(pnTop);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO delete this function because netbean
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
@@ -221,9 +233,9 @@ public class Staff_GUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_XoaActionPerformed
 
-    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ResetActionPerformed
+    }//GEN-LAST:event_btnResetActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
@@ -235,24 +247,25 @@ public class Staff_GUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Reset;
     private javax.swing.JButton Sua;
     private javax.swing.JButton Them;
     private javax.swing.JButton Tim;
     private javax.swing.JButton Xoa;
-    private GUI.MyCustom.datechooser.DateChooser dateChooser1;
-    private GUI.MyCustom.swing.Input input1;
-    private GUI.MyCustom.swing.Input input2;
-    private GUI.MyCustom.swing.Input input3;
-    private GUI.MyCustom.swing.Input input4;
-    private GUI.MyCustom.swing.Input input5;
-    private GUI.MyCustom.swing.Input input6;
-    private GUI.MyCustom.swing.Input input7;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JComboBox<String> cmbGroup;
+    private GUI.MyCustom.datechooser.DateChooser datechooseBirth;
+    private javax.swing.JLabel lbBirth;
+    private javax.swing.JLabel lbCbGroup;
+    private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel pnStaffMenu;
     private javax.swing.JPanel pnTop;
+    private javax.swing.JScrollPane scrTbStaff;
+    private javax.swing.JTable tbStaff;
+    private javax.swing.JTextField txtBirth;
+    private GUI.MyCustom.swing.Input txtKey;
+    private GUI.MyCustom.swing.Input txtName;
+    private GUI.MyCustom.swing.Input txtPassword;
+    private GUI.MyCustom.swing.Input txtPhone;
+    private GUI.MyCustom.swing.Input txtUsername;
     // End of variables declaration//GEN-END:variables
 }
