@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import DB_CONECT.DatabaseConnection;
 import DTO.Staff_DTO;
 
@@ -14,16 +13,15 @@ public class Staff_DAO {
 
     public boolean addStaff(Staff_DTO s) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`nhan_vien` VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`nhan_vien` VALUES(?,?,?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setInt(1, s.getId_staff());
-            pstmt.setString(2, s.getStaff_name());
-            pstmt.setDate(3, s.getBrith());
-            pstmt.setInt(4, s.getPhone());
-            pstmt.setString(5, s.getGroup_name());
-            pstmt.setString(6, s.getUsername());
-            pstmt.setString(7, s.getPassword());
-            pstmt.setBoolean(8, s.isActive());
+            pstmt.setString(1, s.getStaff_name());
+            pstmt.setDate(2, s.getBrith());
+            pstmt.setString(3, s.getPhone());
+            pstmt.setString(4, s.getGroup_name());
+            pstmt.setString(5, s.getUsername());
+            pstmt.setString(6, s.getPassword());
+            pstmt.setBoolean(7, s.isActive());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -61,7 +59,7 @@ public class Staff_DAO {
                 s.setId_staff(rs.getInt("id_nv"));
                 s.setStaff_name(rs.getString("ten_nv"));
                 s.setBrith(rs.getDate("ngay_sinh"));
-                s.setPhone(rs.getInt("phone"));
+                s.setPhone(rs.getString("phone"));
                 s.setGroup_name(rs.getString("ten_nhom"));
                 s.setUsername(rs.getString("username"));
                 s.setPassword(rs.getString("password"));
@@ -89,7 +87,7 @@ public class Staff_DAO {
                 s.setId_staff(rs.getInt("id_nv"));
                 s.setStaff_name(rs.getString("ten_nv"));
                 s.setBrith(rs.getDate("BIRTH"));
-                s.setPhone(rs.getInt("phone"));
+                s.setPhone(rs.getString("phone"));
                 s.setGroup_name(rs.getString("ten_nhom"));
                 s.setUsername(rs.getString("username"));
                 s.setPassword(rs.getString("password"));
@@ -118,8 +116,8 @@ public class Staff_DAO {
                 check = true;
                 s.setId_staff(rs.getInt("id_nv"));
                 s.setStaff_name(rs.getString("ten_nv"));
-                s.setBrith(rs.getDate("BIRTH"));
-                s.setPhone(rs.getInt("phone"));
+                s.setBrith(rs.getDate("ngay_sinh"));
+                s.setPhone(rs.getString("phone"));
                 s.setGroup_name(rs.getString("ten_nhom"));
                 s.setUsername(rs.getString("username"));
                 s.setPassword(rs.getString("password"));
@@ -146,7 +144,7 @@ public class Staff_DAO {
             pstmt.setInt(8, s.getId_staff());
             pstmt.setString(1, s.getStaff_name());
             pstmt.setDate(2, s.getBrith());
-            pstmt.setInt(3, s.getPhone());
+            pstmt.setString(3, s.getPhone());
             pstmt.setString(4, s.getGroup_name());
             pstmt.setString(5, s.getUsername());
             pstmt.setString(6, s.getPassword());
@@ -177,4 +175,20 @@ public class Staff_DAO {
         }
         return false;
     }
+
+    public int getAccountId (String username , String password){
+        try{
+            String sql = "SELECT `id_nv` FROM `libarymanager`.`nhan_vien` WHERE username = ? AND password = ?";
+            PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+                return rs.getInt("id_nv");
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
 }

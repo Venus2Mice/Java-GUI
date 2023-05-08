@@ -36,13 +36,14 @@ public class Role_DAO {
 
     public boolean addRole(Role_DTO r) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`quyen` VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`quyen` VALUES(?,?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setInt(1, r.getRole_id());
-            pstmt.setBoolean(2, r.isCrud_user());
-            pstmt.setBoolean(3, r.isCrud_book());
-            pstmt.setBoolean(4, r.isCrud_orders());
+            pstmt.setBoolean(1, r.isCrud_user());
+            pstmt.setBoolean(2, r.isCrud_book());
+            pstmt.setBoolean(3, r.isCrud_nxb());
+            pstmt.setBoolean(4, r.isCrud_role());
             pstmt.setBoolean(5, r.isCrud_cardlib());
+            pstmt.setBoolean(6, r.isCrud_orders());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -83,6 +84,8 @@ public class Role_DAO {
                 r.setCrud_book(rs.getBoolean("crud_book"));
                 r.setCrud_orders(rs.getBoolean("crud_muontra"));
                 r.setCrud_cardlib(rs.getBoolean("crud_thethuvien"));
+                r.setCrud_role(rs.getBoolean("crud_quyen"));
+                r.setCrud_nxb(rs.getBoolean("crud_nxb"));
             }
 
             if (check) {
@@ -97,14 +100,16 @@ public class Role_DAO {
     public boolean updateRole(Role_DTO r) {
         try {
             String sqlUpdate = "UPDATE `libarymanager`.`quyen`"
-                    + "\nSET \n crud_user = ?, crud_book = ?, curd_muontra = ?, crud_thethuvien = ?"
+                    + "\nSET \n crud_user = ?, crud_book = ?, crud_nxb=?, crud_quyen=?, curd_muontra = ?, crud_thethuvien = ?"
                     + "\nWHERE id_quyen = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
             pstmt.setBoolean(1, r.isCrud_user());
             pstmt.setBoolean(2, r.isCrud_book());
-            pstmt.setBoolean(3, r.isCrud_orders());
-            pstmt.setBoolean(4, r.isCrud_cardlib());
-            pstmt.setInt(5, r.getRole_id());
+            pstmt.setBoolean(3, r.isCrud_nxb());
+            pstmt.setBoolean(4, r.isCrud_role());
+            pstmt.setBoolean(5, r.isCrud_orders());
+            pstmt.setBoolean(6, r.isCrud_cardlib());
+            pstmt.setInt(7, r.getRole_id());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -112,5 +117,21 @@ public class Role_DAO {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+
+    public int checkGrpExist(String grpname) {
+        // kiem tra nhom da ton tai neu co tra ve id nhom
+        try {
+            String sql = "SELECT `id_quyen` FROM `libarymanager`.`auth` WHERE nhom = ?";
+            PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
+            pstmt.setString(1, grpname);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id_quyen");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
     }
 }

@@ -6,17 +6,26 @@ import DAO.Role_DAO;
 import DTO.Role_DTO;
 
 public class Role_BUS {
+
+    public static Role_DTO dsquyen = null ;
+
+
     private Role_DAO role_DAO = null;
 
     public Role_BUS() {
         this.role_DAO = new Role_DAO();
     }
 
-    public List<Role_DTO> getAllStaff() {
+    public List<Role_DTO> getAllRole() {
         return role_DAO.getAllRole();
     }
 
-    public boolean addStaff(Role_DTO r) {
+    public void checkQuyen(String grp){
+        int idRole = role_DAO.checkGrpExist(grp);
+        dsquyen = role_DAO.getRoleById(idRole);
+    } 
+
+    public boolean addRole(Role_DTO r) {
         if (r == null)
             return false;
         int id = r.getRole_id();
@@ -28,11 +37,11 @@ public class Role_BUS {
         }
     }
 
-    public boolean updateStaff(Role_DTO r) {
+    public boolean updateRole(Role_DTO r) {
         return r != null ? role_DAO.updateRole(r) : false;
     }
 
-    public boolean deleteStaff(Role_DTO r) {
+    public boolean deleteRole(Role_DTO r) {
         return r != null ? role_DAO.delRole(r) : false;
     }
 

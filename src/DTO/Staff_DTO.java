@@ -6,7 +6,7 @@ public class Staff_DTO {
     private int id_staff;
     private String staff_name;
     private Date brith;
-    private int phone;
+    private String phone;
     private String username;
     private String password;
     private String group_name;
@@ -52,11 +52,11 @@ public class Staff_DTO {
         this.brith = brith;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

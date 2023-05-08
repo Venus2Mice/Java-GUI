@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App.App",
+            "projectName": "netbeanDo_An_9bfb3018"
+        },
+        {
+            "type": "java",
+            "name": "login",
+            "request": "launch",
+            "mainClass": "GUI.loginform.login",
+            "projectName": "netbeanDo_An_9bfb3018"
+        },
+        {
+            "type": "java",
+            "name": "abcdf",
+            "request": "launch",
+            "mainClass": "GUI.abcdf",
+            "projectName": "netbeanDo_An_9bfb3018"
+        },
+        {
+            "type": "java",
+            "name": "Login_GUI",
+            "request": "launch",
+            "mainClass": "GUI.Login_GUI",
+            "projectName": "netbeanDo_An_9bfb3018"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

@@ -4,18 +4,23 @@ import java.util.List;
 
 import DAO.Staff_DAO;
 import DTO.Staff_DTO;
+import GUI.MyCustom.MyDialog;
 
 public class Staff_BUS {
+
+    private final static int EMPTY_ERROR = -1;
+    private final static int WRONG_ERROR = -2;
+
     private Staff_DAO staff_DAO = null;
 
     public Staff_BUS() {
         this.staff_DAO = new Staff_DAO();
     }
 
-    public List<Staff_DTO> getAllStaff(){
+    public List<Staff_DTO> getAllStaff() {
         return staff_DAO.getAllStaff();
     }
-    
+
     public boolean addStaff(Staff_DTO s) {
         if (s == null)
             return false;
@@ -27,6 +32,7 @@ public class Staff_BUS {
             return staff_DAO.addStaff(s);
         }
     }
+
     public boolean updateStaff(Staff_DTO s) {
         return s != null ? staff_DAO.updateStaff(s) : false;
     }
@@ -38,5 +44,36 @@ public class Staff_BUS {
     public boolean setActive(int id, boolean active) {
         return staff_DAO.setActive(id, active);
     }
-    
+
+    private int checkLogin(String username, String password) {
+        username = username.replaceAll("\\s+", "");
+        password = password.replaceAll("\\s+", "");
+
+        if (username.length() <= 0 || password.length() <= 0)
+            return  EMPTY_ERROR;
+
+        if (staff_DAO.getAccountId(username, password) == 0) {
+            return  WRONG_ERROR;
+        }
+        return staff_DAO.getAccountId(username, password);
+    }
+
+    public Staff_DTO Login(String username, String password) {
+        if (checkLogin(username, password) == EMPTY_ERROR) {
+            new MyDialog("Không được để trống thông tin!", MyDialog.ERROR_DIALOG);
+            return null;
+        }
+
+        else if (checkLogin(username, password) == WRONG_ERROR) {
+            new MyDialog("Sai thông tin đăng nhặp", MyDialog.ERROR_DIALOG);
+            return null;
+        }
+
+        Staff_DTO s = staff_DAO.getStaffById(staff_DAO.getAccountId(username, password));
+        Role_BUS role_BUS = new Role_BUS();
+        role_BUS.checkQuyen(s.getGroup_name());
+        new MyDialog("Đăng nhập thành công!", MyDialog.SUCCESS_DIALOG);
+        return s;
+    }
+
 }

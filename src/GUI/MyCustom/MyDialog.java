@@ -2,7 +2,7 @@ package GUI.MyCustom;
 
 import javax.swing.*;
 
-import GUI.Main.Main;
+import GUI.MainManager.MainManager;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -17,7 +17,7 @@ public class MyDialog extends JDialog {
     public final static int WARNING_DIALOG = 4;
 
     public MyDialog(String content, int type) {
-        Main.changLNF("Windows");
+        MainManager.changLNF("Windows");
         this.content = content;
         this.type = type;
         addControls();

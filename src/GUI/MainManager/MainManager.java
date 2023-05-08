@@ -1,4 +1,4 @@
-package GUI.Main;
+package GUI.MainManager;
 
 import GUI.Libary_Card_GUI;
 import GUI.Book_GUI;
@@ -12,29 +12,28 @@ import GUI.Order_GUI;
 import java.awt.Color;
 import javax.swing.JComponent;
 
-public class Main extends javax.swing.JFrame {
+public class MainManager extends javax.swing.JFrame {
 
     private Dashboard home;
     private Form_2 form2;
-    private Form_3 form3;
     private NXB_GUI formNXB;
     private Book_GUI formBook;
     private Staff_GUI formStaff;
     private Order_GUI formOrder;
     private Libary_Card_GUI formAccount;
 
-    public Main() {
+    public MainManager() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         home = new Dashboard();
         form2 = new Form_2();
-        form3 = new Form_3();
+        new Form_3();
         formNXB = new NXB_GUI();
         formBook = new Book_GUI();
         formStaff = new Staff_GUI();
         formOrder = new Order_GUI();
         formAccount = new Libary_Card_GUI();
-        pnMenu.initMoving(Main.this);
+        pnMenu.initMoving(MainManager.this);
         pnMenu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -62,6 +61,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         setForm(new Dashboard());
+        this.setVisible(true);
     }
 
     private void setForm(JComponent com) {
@@ -142,44 +142,45 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-        // (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-         * look and feel.
-         * For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        // </editor-fold>
+    // /**
+    //  * @param args the command line arguments
+    //  */
+    // public static void main(String args[]) {
+    //     /* Set the Nimbus look and feel */
+    //     // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+    //     // (optional) ">
+    //     /*
+    //      * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+    //      * look and feel.
+    //      * For details see
+    //      * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+    //      */
+    //     try {
+    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+    //             if ("Nimbus".equals(info.getName())) {
+    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    //                 break;
+    //             }
+    //         }
+    //     } catch (ClassNotFoundException ex) {
+    //         java.util.logging.Logger.getLogger(MainManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (InstantiationException ex) {
+    //         java.util.logging.Logger.getLogger(MainManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (IllegalAccessException ex) {
+    //         java.util.logging.Logger.getLogger(MainManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    //         java.util.logging.Logger.getLogger(MainManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     }
+    //     // </editor-fold>
+    //     // </editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
-    }
+    //     /* Create and display the form */
+    //     java.awt.EventQueue.invokeLater(new Runnable() {
+    //         public void run() {
+    //             new MainManager().setVisible(true);
+    //         }
+    //     });
+    // }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnContainer;
