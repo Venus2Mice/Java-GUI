@@ -20,9 +20,10 @@ public class Role_BUS {
         return role_DAO.getAllRole();
     }
 
-    public void checkQuyen(String grp){
+    public boolean checkQuyen(String grp){
         int idRole = role_DAO.checkGrpExist(grp);
         dsquyen = role_DAO.getRoleById(idRole);
+        return dsquyen!=null;
     } 
 
     public boolean addRole(Role_DTO r) {

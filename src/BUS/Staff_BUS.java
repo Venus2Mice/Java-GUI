@@ -11,6 +11,8 @@ public class Staff_BUS {
     private final static int EMPTY_ERROR = -1;
     private final static int WRONG_ERROR = -2;
 
+    public static Staff_DTO staff_DTO_current_login = null;
+
     private Staff_DAO staff_DAO = null;
 
     public Staff_BUS() {
@@ -50,10 +52,10 @@ public class Staff_BUS {
         password = password.replaceAll("\\s+", "");
 
         if (username.length() <= 0 || password.length() <= 0)
-            return  EMPTY_ERROR;
+            return EMPTY_ERROR;
 
         if (staff_DAO.getAccountId(username, password) == 0) {
-            return  WRONG_ERROR;
+            return WRONG_ERROR;
         }
         return staff_DAO.getAccountId(username, password);
     }
@@ -71,8 +73,10 @@ public class Staff_BUS {
 
         Staff_DTO s = staff_DAO.getStaffById(staff_DAO.getAccountId(username, password));
         Role_BUS role_BUS = new Role_BUS();
-        role_BUS.checkQuyen(s.getGroup_name());
-        new MyDialog("Đăng nhập thành công!", MyDialog.SUCCESS_DIALOG);
+        if (role_BUS.checkQuyen(s.getGroup_name())) {
+            new MyDialog("Đăng nhập thành công!", MyDialog.SUCCESS_DIALOG);
+            staff_DTO_current_login = s;
+        }
         return s;
     }
 

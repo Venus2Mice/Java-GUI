@@ -22,7 +22,7 @@ CREATE TABLE `quyen`
 	`crud_nxb` BIT NOT NULL DEFAULT 0,
 	`crud_quyen` BIT NOT NULL DEFAULT 0,
 	`crud_thethuvien` BIT NOT NULL DEFAULT 0,
-	`curd_muontra` BIT NOT NULL DEFAULT 0,
+	`crud_muontra` BIT NOT NULL DEFAULT 0,
     PRIMARY KEY (`id_quyen`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

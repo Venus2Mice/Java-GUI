@@ -4,63 +4,55 @@ import GUI.Libary_Card_GUI;
 import GUI.Book_GUI;
 import GUI.NXB_GUI;
 import GUI.MyCustom.event.EventMenuSelected;
-import GUI.MyCustom.form.Form_2;
-import GUI.MyCustom.form.Form_3;
 import GUI.MyCustom.form.Dashboard;
 import GUI.Staff_GUI;
 import GUI.Order_GUI;
+
+import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JComponent;
 
 public class MainManager extends javax.swing.JFrame {
 
-    private Dashboard home;
-    private Form_2 form2;
+    private Dashboard dashboard;
     private NXB_GUI formNXB;
     private Book_GUI formBook;
     private Staff_GUI formStaff;
     private Order_GUI formOrder;
-    private Libary_Card_GUI formAccount;
+    private Libary_Card_GUI formLibCard;
+    private CardLayout cardMenuGrp = new CardLayout();
 
     public MainManager() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        home = new Dashboard();
-        form2 = new Form_2();
-        new Form_3();
+        dashboard = new Dashboard();
         formNXB = new NXB_GUI();
         formBook = new Book_GUI();
         formStaff = new Staff_GUI();
         formOrder = new Order_GUI();
-        formAccount = new Libary_Card_GUI();
+        formLibCard = new Libary_Card_GUI();
+        pnContainer.add(dashboard,"1");
+        pnContainer.add(formBook,"2");
+        pnContainer.add(formNXB,"3");
+        pnContainer.add(formStaff,"4");
+        pnContainer.add(formLibCard,"5");
+        pnContainer.add(formOrder,"6");
         pnMenu.initMoving(MainManager.this);
         pnMenu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
                 switch (index) {
-                    case 1:
-                        setForm(home);
-                        break;
-                    case 2:
-                        setForm(formBook);
-                        break;
-                    case 3:
-                        setForm(formNXB);
-                        break;
-                    case 4:
-                        setForm(formStaff);
-                        break;
-                    case 5:
-                        setForm(formOrder);
-                        break;
-                    case 6:
-                        setForm(formAccount);
-                        break;
-                    default : setForm(form2);
+                    case 1 : cardMenuGrp.show(pnContainer, "1");break;
+                    case 2 : cardMenuGrp.show(pnContainer, "2");break;
+                    case 3 : cardMenuGrp.show(pnContainer, "3");break;
+                    case 4 : cardMenuGrp.show(pnContainer, "4");break;
+                    case 5 : cardMenuGrp.show(pnContainer, "5");break;
+                    case 6 : cardMenuGrp.show(pnContainer, "6");break;
                 }
             }
         });
-        setForm(new Dashboard());
+        //setForm(new Dashboard());
+        cardMenuGrp.show(pnContainer, "1");
         this.setVisible(true);
     }
 
@@ -82,15 +74,12 @@ public class MainManager extends javax.swing.JFrame {
     private void initComponents() {
 
         pnMain = new GUI.MyCustom.swing.PanelBorder();
-        pnContainer = new javax.swing.JPanel();
+        pnContainer = new javax.swing.JPanel(cardMenuGrp);
         pnHeader = new GUI.MyCustom.component.Header();
         pnMenu = new GUI.MyCustom.component.Menu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-
-        pnContainer.setOpaque(false);
-        pnContainer.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
         pnMain.setLayout(pnMainLayout);

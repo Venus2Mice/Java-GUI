@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 
+import BUS.Role_BUS;
+import DTO.Role_DTO;
+
 public class Menu extends javax.swing.JPanel {
 
     private EventMenuSelected event;
@@ -29,13 +32,19 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
+        Role_DTO listquyen = Role_BUS.dsquyen;
         listMenu1.addItem(new Model_Menu("", "Workspace", Model_Menu.MenuType.TITLE));
         listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("2", "Sách", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("3", "Nhà Xuất Bản", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("4", "Nhân viên", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("5", "QL mượn trả", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("6", "Thẻ thư viện", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_book())
+            listMenu1.addItem(new Model_Menu("2", "Sách", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_nxb())
+            listMenu1.addItem(new Model_Menu("3", "Nhà Xuất Bản", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_user())
+            listMenu1.addItem(new Model_Menu("4", "Nhân viên", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_cardlib())
+            listMenu1.addItem(new Model_Menu("5", "Thẻ thư viện", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_orders())
+            listMenu1.addItem(new Model_Menu("6", "Ql phiếu mượn trả", Model_Menu.MenuType.MENU));
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

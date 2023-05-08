@@ -8,6 +8,7 @@ package GUI;
 import BUS.Staff_BUS;
 import DTO.Staff_DTO;
 import GUI.MainManager.MainManager;
+import GUI.MyCustom.MyDialog;
 import java.awt.event.KeyEvent;
 
 /**
@@ -162,6 +163,11 @@ public class login extends javax.swing.JFrame {
         lbFoget.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbFoget.setText("Forget Password?");
         lbFoget.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbFoget.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbFogetMouseClicked(evt);
+            }
+        });
         pnFormLogin.add(lbFoget, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 121, 27));
 
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -192,6 +198,11 @@ public class login extends javax.swing.JFrame {
             xuLyDangNhap();
         }
     }//GEN-LAST:event_txtpasswordKeyPressed
+
+    private void lbFogetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFogetMouseClicked
+        // TODO add your handling code here:
+        new MyDialog("Xin liên hệ Admin để giải quyết!", MyDialog.INFO_DIALOG);
+    }//GEN-LAST:event_lbFogetMouseClicked
 
     private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lbExitMouseClicked
         System.exit(0);
@@ -230,12 +241,10 @@ public class login extends javax.swing.JFrame {
         staff_BUS = new Staff_BUS();
         String username = txtusername.getText();
         String password = txtpassword.getText();
-        System.out.println(username+"vs"+password);
         Staff_DTO s = staff_BUS.Login(username, password);
         if (s != null) {
             MainManager gui = new MainManager();
             this.dispose();
-
         }
 
     }
