@@ -7,6 +7,9 @@ public class Order_DTO {
     private int card_id;
     private int staff_id;
     private Date day_init;
+    private String desc;
+    private Date day_return;
+    private boolean status;
 
     public int getOrder_id() {
         return order_id;
@@ -38,6 +41,30 @@ public class Order_DTO {
 
     public void setDay_init(Date day_init) {
         this.day_init = day_init;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Date getDay_return() {
+        return day_return;
+    }
+
+    public void setDay_return(Date day_return) {
+        this.day_return = day_return;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
 }

@@ -98,4 +98,8 @@ public class Book_BUS {
         }
         return list;
     }
+
+    public Book_DTO getById(String isbn){
+        return book_DAO.getBookByIsbn(isbn);
+    }
 }

@@ -31,6 +31,9 @@ public class Staff_GUI extends javax.swing.JPanel {
         }
     };
     MyTable tbStaff;
+
+    private Staff_BUS staff_BUS;
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -351,6 +354,5 @@ public class Staff_GUI extends javax.swing.JPanel {
     private GUI.MyCustom.swing.Input txtPassword;
     private GUI.MyCustom.swing.Input txtPhone;
     private GUI.MyCustom.swing.Input txtUsername;
-    private Staff_BUS staff_BUS;
     // End of variables declaration//GEN-END:variables
 }
