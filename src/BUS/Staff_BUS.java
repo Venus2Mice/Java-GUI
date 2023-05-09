@@ -74,7 +74,7 @@ public class Staff_BUS {
         Staff_DTO s = staff_DAO.getStaffById(staff_DAO.getAccountId(username, password));
         Role_BUS role_BUS = new Role_BUS();
         if (role_BUS.checkQuyen(s.getGroup_name())) {
-            new MyDialog("Đăng nhập thành công!", MyDialog.SUCCESS_DIALOG);
+            //new MyDialog("Đăng nhập thành công!", MyDialog.SUCCESS_DIALOG);
             staff_DTO_current_login = s;
         }
         return s;

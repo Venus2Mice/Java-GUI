@@ -23,6 +23,9 @@ public class Order_DAO {
                 o.setCard_id(rs.getInt("id_the"));
                 o.setStaff_id(rs.getInt("id_nv"));
                 o.setDay_init(rs.getDate("ngay_tao"));
+                o.setDesc(rs.getString("desc"));
+                o.setStatus(rs.getBoolean("status"));
+                o.setDay_return(rs.getDate("ngay_tra"));
                 Oderlist.add(o);
             }
         } catch (SQLException ex) {
@@ -33,12 +36,15 @@ public class Order_DAO {
 
     public boolean addOrder(Order_DTO o) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`phieu_muontra` VALUES(?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`phieu_muontra` VALUES(?,?,?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
             pstmt.setInt(1, o.getOrder_id());
             pstmt.setInt(2, o.getCard_id());
             pstmt.setInt(3, o.getStaff_id());
             pstmt.setDate(4, o.getDay_init());
+            pstmt.setString(5, o.getDesc());
+            pstmt.setBoolean(6, o.isStatus());
+            pstmt.setDate(7, o.getDay_return());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -78,6 +84,9 @@ public class Order_DAO {
                 o.setCard_id(rs.getInt("id_the"));
                 o.setStaff_id(rs.getInt("id_nv"));
                 o.setDay_init(rs.getDate("ngay_tao"));
+                o.setDesc(rs.getString("desc"));
+                o.setStatus(rs.getBoolean("status"));
+                o.setDay_return(rs.getDate("ngay_tra"));
             }
 
             if (check) {
@@ -92,13 +101,16 @@ public class Order_DAO {
     public boolean updateOrder(Order_DTO o) {
         try {
             String sqlUpdate = "UPDATE `libarymanager`.`phieu_muontra`"
-                    + "\nSET \nid_the = ?, id_nv = ?, ngay_tao = ?"
+                    + "\nSET \nid_the = ?, id_nv = ?, ngay_tao = ? , desc = ? , status = ? , ngay_tra = ?"
                     + "\nWHERE id = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
             pstmt.setInt(1, o.getCard_id());
             pstmt.setInt(2, o.getStaff_id());
             pstmt.setDate(3, o.getDay_init());
-            pstmt.setInt(4, o.getOrder_id());
+            pstmt.setString(4, o.getDesc());
+            pstmt.setBoolean(5, o.isStatus());
+            pstmt.setDate(6, o.getDay_return());
+            pstmt.setInt(7, o.getOrder_id());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }

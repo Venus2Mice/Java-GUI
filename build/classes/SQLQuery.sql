@@ -86,6 +86,9 @@ CREATE TABLE `phieu_muontra`
 	`id_the` INT NOT NULL,
 	`id_nv` INT NOT NULL,
 	`ngay_tao` DATE NOT NULL,
+	`desc` text CHARACTER SET utf8,
+	`status` BIT NOT NULL DEFAULT 0,
+	`ngay_tra` DATE ,
 	PRIMARY KEY (`id`),
 	CONSTRAINT `FK_STAFFORDER` FOREIGN KEY (`id_nv`) REFERENCES `nhan_vien`(`id_nv`),
 	CONSTRAINT `FK_CARDOREDER` FOREIGN KEY (`id_the`) REFERENCES `the_thuvien`(`id_the`)
@@ -95,9 +98,6 @@ CREATE TABLE `chi_tiet_muontra`
 (
 	`id_muontra` INT NOT NULL,
 	`isbn_book` VARCHAR(32) NOT NULL,
-	`desc` text CHARACTER SET utf8,
-	`status` BIT NOT NULL DEFAULT 0,
-	`ngay_tra` DATE ,
 	CONSTRAINT `pk_chitiet_muontra` PRIMARY KEY (`id_muontra`,`isbn_book`),
 	CONSTRAINT `fk_chitietmuontra_phieumuontra` FOREIGN KEY (`id_muontra`) REFERENCES `phieu_muontra`(`id`),
 	CONSTRAINT `fk_chitietmuontra_sach` FOREIGN KEY (`isbn_book`) REFERENCES `book`(`isbn`)
