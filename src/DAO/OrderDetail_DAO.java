@@ -18,7 +18,7 @@ public class OrderDetail_DAO {
             String sqlQuery = "SELECT * FROM `libarymanager`.`chi_tiet_muontra` WHERE `id_muontra` = ? ";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlQuery);
             pstmt.setInt(1, id_order);
-            ResultSet rs = pstmt.executeQuery(sqlQuery);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 OrderDetail_DTO p = new OrderDetail_DTO();
                 p.setId_order(rs.getInt("id_muontra"));
@@ -60,10 +60,10 @@ public class OrderDetail_DAO {
 
     public boolean addBookIntoDetail(int id_order, String isbn_book) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`chi_tiet_muontra` (`isbn_book`) VALUES(?) WHERE `id_muontra = `";
+            String sql = "INSERT INTO `libarymanager`.`chi_tiet_muontra` VALUES(?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setString(1, isbn_book);
-            pstmt.setInt(2, id_order);
+            pstmt.setString(2, isbn_book);
+            pstmt.setInt(1, id_order);
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }

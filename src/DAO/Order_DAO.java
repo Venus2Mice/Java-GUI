@@ -34,32 +34,32 @@ public class Order_DAO {
         return Oderlist;
     }
 
-    public boolean addOrder(Order_DTO o) {
+    public int addOrder(Order_DTO o) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`phieu_muontra` VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`phieu_muontra` (`id_the`,`id_nv`,`ngay_tao`,`desc`) VALUES(?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setInt(1, o.getOrder_id());
-            pstmt.setInt(2, o.getCard_id());
-            pstmt.setInt(3, o.getStaff_id());
-            pstmt.setDate(4, o.getDay_init());
-            pstmt.setString(5, o.getDesc());
-            pstmt.setBoolean(6, o.isStatus());
-            pstmt.setDate(7, o.getDay_return());
+            pstmt.setInt(1, o.getCard_id());
+            pstmt.setInt(2, o.getStaff_id());
+            pstmt.setDate(3, o.getDay_init());
+            pstmt.setString(4, o.getDesc());
             if (pstmt.executeUpdate() >= 1) {
-                return true;
+                String sql2 = "SELECT Max(`id`) as LastID FROM `phieu_muontra`";
+                ResultSet rs = pstmt.executeQuery(sql2);
+                if(rs.next())
+                    return rs.getInt("LastID");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return false;
+        return -1;
     }
 
-    public boolean delOrder(Order_DTO o) {
+    public boolean delOrder(int id) {
         try {
             String sqlUpdate = "DELETE FROM `libarymanager`.`phieu_muontra`"
                     + "\nWHERE id = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
-            pstmt.setInt(1, o.getOrder_id());
+            pstmt.setInt(1, id);
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }

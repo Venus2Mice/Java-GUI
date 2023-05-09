@@ -18,7 +18,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import DTO.Order_DTO;
-import GUI.MyCustom.MyDialog;
 import GUI.MyCustom.MyTable;
 import GUI.MyCustom.TransparentPanel;
 import BUS.Order_BUS;
@@ -44,9 +43,10 @@ public class Order_GUI extends javax.swing.JPanel {
 
     final Color colorPanel = new Color(247, 247, 247);
     public static JButton btnReset;
-    private JButton btnAdd, btnUpdate, btnDel, btnSearch;
+    private JButton btnAdd, btnDel, btnSearch , btnDetail , btnUpdate;
     private JTextField txtSearch, txtID , txtIDStaff, txtIDLibCard, txtDayinit;
     private DateChooser datyInit;
+    private JCheckBox ckStatus;
 
     private void addControl() {
         Font font = new Font("Tahoma", Font.PLAIN, 15);
@@ -72,16 +72,18 @@ public class Order_GUI extends javax.swing.JPanel {
         JPanel pnTextFiledRight = new TransparentPanel();
         pnTextFiledRight.setLayout(new BoxLayout(pnTextFiledRight, BoxLayout.Y_AXIS));
 
-        JLabel lbID, lbIDStaff, lbIDLibCard , lbDayinit;
+        JLabel lbID, lbIDStaff, lbIDLibCard , lbDayinit , lbStatus;
         lbID = new JLabel("ID");
         lbIDStaff = new JLabel("ID NV");
         lbIDLibCard = new JLabel("ID THẺ THƯ VIỆN");
         lbDayinit = new JLabel("NGÀY TẠO");
+        lbStatus = new JLabel("NGÀY TRẢ");
 
         lbID.setFont(font);
         lbIDStaff.setFont(font);
         lbIDLibCard.setFont(font);
         lbDayinit.setFont(font);
+        lbStatus.setFont(font);
 
         txtID = new JTextField(15);
         txtID.setEditable(false);
@@ -89,6 +91,8 @@ public class Order_GUI extends javax.swing.JPanel {
         txtIDStaff.setEditable(false);
         txtIDLibCard = new JTextField(15);
         txtDayinit = new JTextField(15);
+
+        ckStatus = new JCheckBox();
 
         txtID.setFont(font);
         txtIDStaff.setFont(font);
@@ -119,37 +123,45 @@ public class Order_GUI extends javax.swing.JPanel {
         pnDayInit.add(txtDayinit);
         pnTextFiledLeft.add(pnDayInit);
 
+        JPanel pnCkStatus = new TransparentPanel();
+        pnCkStatus.add(lbStatus);
+        pnCkStatus.add(ckStatus);
+        pnTextFiledRight.add(pnCkStatus);
+
         Dimension lbSize = new Dimension(125, 40);
         lbID.setPreferredSize(lbSize);
         lbIDStaff.setPreferredSize(lbSize);
         lbIDLibCard.setPreferredSize(lbSize);
         lbDayinit.setPreferredSize(lbSize);
-
+        lbStatus.setPreferredSize(lbSize);
+        
         pnTop.add(pnTextFiledLeft, BorderLayout.WEST);
         pnTop.add(pnTextFiledRight, BorderLayout.EAST);
         pnOrder.add(pnTop);
 
         JPanel pnButton = new TransparentPanel();
         btnAdd = new JButton("Thêm");
-        btnUpdate = new JButton("Lưu");
         btnDel = new JButton("Xóa");
+        btnUpdate = new JButton("Sửa");
+        btnDetail = new JButton("Xem chi tiết");
 
         Font fntBtn = new Font("Tahoma", Font.PLAIN, 16);
 
         btnAdd.setFont(fntBtn);
-        btnUpdate.setFont(fntBtn);
         btnDel.setFont(fntBtn);
+        btnDetail.setFont(font);
+        btnUpdate.setFont(font);
 
         pnButton.add(btnAdd);
-        pnButton.add(btnUpdate);
         pnButton.add(btnDel);
+        pnButton.add(btnUpdate);
+        pnButton.add(btnDetail);
 
         pnOrder.add(pnButton);
 
         Dimension btnSize = btnAdd.getPreferredSize();
         btnAdd.setPreferredSize(btnSize);
         btnDel.setPreferredSize(btnSize);
-        btnUpdate.setPreferredSize(btnSize);
 
         // ====PANEL SEARCH=====
         JPanel pnSearch = new TransparentPanel();
@@ -248,10 +260,12 @@ public class Order_GUI extends javax.swing.JPanel {
             }
         });
 
-        btnUpdate.addActionListener(new ActionListener() {
+        btnDetail.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                eventUpdateBook();
+                String txt = txtID.getText();
+                if(!txt.equals(""))
+                    new DialogDetailOrder_GUI(Integer.parseInt(txt));
             }
         });
     }
@@ -284,14 +298,18 @@ public class Order_GUI extends javax.swing.JPanel {
     }
 
     private void eventAddBook() {
+            new DialogCreateOrder_GUI();
             btnReset.doClick();
     }
 
-    private void eventUpdateBook() {
-            btnReset.doClick();
+    private void eUpdate(){
+        btnReset.doClick();
     }
+
 
     private void eventDeleteBook() {
+            int id = Integer.parseInt(txtID.getText());
+            order_BUS.deleteOrder(id);
             btnReset.doClick();
     }
 

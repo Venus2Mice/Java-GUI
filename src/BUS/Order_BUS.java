@@ -17,13 +17,13 @@ public class Order_BUS {
         return order_DAO.getAllOrder();
     }
 
-    public boolean addOrder(Order_DTO o) {
+    public int addOrder(Order_DTO o) {
         if (o == null)
-            return false;
+            return -1;
         int id = o.getOrder_id();
         Order_DTO tmp = order_DAO.getOrderById(id);
         if (tmp != null) {
-            return false;
+            return -1;
         } else {
             return order_DAO.addOrder(o);
         }
@@ -33,8 +33,8 @@ public class Order_BUS {
         return o != null ? order_DAO.updateOrder(o) : false;
     }
 
-    public boolean deleteOrder(Order_DTO o) {
-        return o != null ? order_DAO.delOrder(o) : false;
+    public boolean deleteOrder(int id) {
+        return order_DAO.delOrder(id) ;
     }
 
     public ArrayList<Order_DTO> findByKey(String key) {
