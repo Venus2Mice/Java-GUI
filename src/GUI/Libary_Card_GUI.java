@@ -1,6 +1,13 @@
 package GUI;
 
+import BUS.LibCard_BUS;
+import DTO.LibCard_DTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Libary_Card_GUI extends javax.swing.JPanel {
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private LibCard_BUS libcard_BUS;
     public Libary_Card_GUI() {
         initComponents();
         // extra space de canh dong cho nhanh
@@ -194,19 +201,84 @@ public class Libary_Card_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
-        // TODO add your handling code here:
+        try {
+            String start = ngay_tao.getFieldText();
+            String expire = ngay_hethan.getFieldText();
+        
+            java.util.Date utilstartDate = format.parse(start);
+            java.sql.Date sqlstartDate = new java.sql.Date(utilstartDate.getTime());
+        
+            java.util.Date utilendDate = format.parse(expire);
+            java.sql.Date sqlendDate = new java.sql.Date(utilendDate.getTime());
+        
+            String name = tendocgia.getFieldText();
+            String desc1 = desc.getFieldText();
+            String phone1 = phone.getFieldText();
+        
+        
+            LibCard_DTO lib = libcard_BUS.initLibCard(sqlstartDate, sqlendDate, desc1, name, phone1);
+            if (libcard_BUS.updateLibCard(lib)){
+                Reset.doClick();
+            }
+        } catch (ParseException e) {
+        }
     }//GEN-LAST:event_SuaActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
-        // TODO add your handling code here:
+        try {
+            String start = ngay_tao.getFieldText();
+            String expire = ngay_hethan.getFieldText();
+        
+            java.util.Date utilstartDate = format.parse(start);
+            java.sql.Date sqlstartDate = new java.sql.Date(utilstartDate.getTime());
+        
+            java.util.Date utilendDate = format.parse(expire);
+            java.sql.Date sqlendDate = new java.sql.Date(utilendDate.getTime());
+        
+            String name = tendocgia.getFieldText();
+            String desc1 = desc.getFieldText();
+            String phone1 = phone.getFieldText();
+        
+        
+            LibCard_DTO lib = libcard_BUS.initLibCard(sqlstartDate, sqlendDate, desc1, name, phone1);
+            if (libcard_BUS.deleteLibCard(lib)){
+                Reset.doClick();
+            }
+        } catch (ParseException e) {
+        }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+        tendocgia.setFieldText("");
+        ngay_tao.setFieldText("");
+        ngay_hethan.setFieldText("");
+        desc.setFieldText("");
+        phone.setFieldText("");
+        input2.setFieldText("");
     }//GEN-LAST:event_ResetActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
-        // TODO add your handling code here:
+        try {
+            String start = ngay_tao.getFieldText();
+            String expire = ngay_hethan.getFieldText();
+        
+            java.util.Date utilstartDate = format.parse(start);
+            java.sql.Date sqlstartDate = new java.sql.Date(utilstartDate.getTime());
+        
+            java.util.Date utilendDate = format.parse(expire);
+            java.sql.Date sqlendDate = new java.sql.Date(utilendDate.getTime());
+        
+            String name = tendocgia.getFieldText();
+            String desc1 = desc.getFieldText();
+            String phone1 = phone.getFieldText();
+        
+        
+            LibCard_DTO lib = libcard_BUS.initLibCard(sqlstartDate, sqlendDate, desc1, name, phone1);
+            if (libcard_BUS.addLibCard(lib)) {
+                Reset.doClick();
+            }
+        } catch (ParseException e) {
+        }
     }//GEN-LAST:event_ThemActionPerformed
 
     private void TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimActionPerformed

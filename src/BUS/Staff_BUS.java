@@ -5,6 +5,7 @@ import java.util.List;
 import DAO.Staff_DAO;
 import DTO.Staff_DTO;
 import GUI.MyCustom.MyDialog;
+import java.sql.Date;
 
 public class Staff_BUS {
 
@@ -22,17 +23,42 @@ public class Staff_BUS {
     public List<Staff_DTO> getAllStaff() {
         return staff_DAO.getAllStaff();
     }
+    
+    public Staff_DTO initStaff(String name, Date birth, String phone, String group, String username, String password, boolean status) {
+        if (name.trim().equals("") || username.trim().equals("") || password.trim().equals("")) {
+            new MyDialog("Vui lòng điền đầy đủ thông tin!", MyDialog.ERROR_DIALOG);
+            return null;
+        }
+        Staff_DTO staff = new Staff_DTO();
+        staff.setStaff_name(name);
+        staff.setBrith(birth);
+        staff.setPhone(phone);
+        staff.setGroup_name(group);
+        staff.setUsername(username);
+        staff.setPassword(password);
+        staff.setActive(status);
+        System.out.println("initStaff worked at BUS"); // debug, delete later
+        return staff;
+    }
 
+//    public boolean addStaff(Staff_DTO s) {
+//        if (s == null)
+//            return false;
+//        int id = s.getId_staff();
+//        Staff_DTO tmp = staff_DAO.getStaffById(id);
+//        if (tmp != null) {
+//            return false;
+//        } else {
+//            return staff_DAO.addStaff(s);
+//        }
+//    }
+    
     public boolean addStaff(Staff_DTO s) {
         if (s == null)
             return false;
-        int id = s.getId_staff();
-        Staff_DTO tmp = staff_DAO.getStaffById(id);
-        if (tmp != null) {
-            return false;
-        } else {
-            return staff_DAO.addStaff(s);
-        }
+       
+        return staff_DAO.addStaff(s);
+        
     }
 
     public boolean updateStaff(Staff_DTO s) {

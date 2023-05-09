@@ -11,6 +11,14 @@ public class Input extends javax.swing.JPanel {
         jLabel1.setText(text);
     }
     
+    public void setFieldText(String text) {
+        jTextField1.setText(text);
+    }
+    
+    public String getFieldText() {
+        return jTextField1.getText();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
