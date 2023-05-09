@@ -67,20 +67,26 @@ public class Book_BUS {
     }
 
     public boolean updateBook(Book_DTO b) {
-        if (b != null) {
-            new MyDialog("Sửa thành công!", MyDialog.SUCCESS_DIALOG);
-            return book_DAO.updateBook(b);
+        int action =  new MyDialog("Lưu thay đổi ?", MyDialog.WARNING_DIALOG).getAction();
+        if(action == 1){
+            if (b != null) {
+                new MyDialog("Sửa thành công!", MyDialog.SUCCESS_DIALOG);
+                return book_DAO.updateBook(b);
+            }
+            new MyDialog("Sửa thất bại!", MyDialog.ERROR_DIALOG);
         }
-        new MyDialog("Sửa thất bại!", MyDialog.ERROR_DIALOG);
         return false;
     }
 
     public boolean deleteBook(Book_DTO b) {
-        if (b != null) {
-            new MyDialog("Xóa thành công!", MyDialog.SUCCESS_DIALOG);
-            return book_DAO.deleteBook(b);
+        int action = new MyDialog("Xóa ?", MyDialog.WARNING_DIALOG).getAction();
+        if (action == 1) {
+            if (b != null) {
+                new MyDialog("Xóa thành công!", MyDialog.SUCCESS_DIALOG);
+                return book_DAO.deleteBook(b);
+            }
+            new MyDialog("Xóa thất bại!", MyDialog.ERROR_DIALOG);
         }
-        new MyDialog("Xóa thất bại!", MyDialog.ERROR_DIALOG);
         return false;
     }
 

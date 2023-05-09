@@ -2,18 +2,13 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,13 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JDialog;
-
 import BUS.Book_BUS;
 import BUS.OrderDetail_BUS;
 import GUI.MyCustom.MyTable;
 import DTO.Book_DTO;
-import DTO.DetailOrder_DTO;
 import DTO.OrderDetail_DTO;
 
 public class DialogDetailOrder_GUI extends JDialog {
@@ -61,22 +53,27 @@ public class DialogDetailOrder_GUI extends JDialog {
 
         Font font = new Font("Tahoma", Font.PLAIN, 16);
         JPanel pnTop = new JPanel();
+
         lbIdOrder = new JLabel("Chi tiết Phiếu id:" + id);
         JLabel lblTuKhoa = new JLabel("Từ khoá tìm");
+
         txtTuKhoa = new JTextField(20);
         lblTuKhoa.setFont(font);
         lbIdOrder.setFont(font);
         txtTuKhoa.setFont(font);
-        pnTop.add(lblTuKhoa);
+        
         JPanel pntitle = new JPanel();
         pntitle.add(lbIdOrder);
+
         pnTop.add(pntitle);
-        pntitle.add(lbIdOrder);
+        pnTop.add(lblTuKhoa);
         pnTop.add(txtTuKhoa);
+
         JPanel pnHeader = new JPanel();
         pnHeader.setLayout(new BoxLayout(pnHeader, BoxLayout.Y_AXIS));
         pnHeader.add(pntitle);
         pnHeader.add(pnTop);
+
         con.add(pnHeader, BorderLayout.NORTH);
 
         JPanel pnTable = new JPanel();
@@ -104,7 +101,6 @@ public class DialogDetailOrder_GUI extends JDialog {
                     loadDataLenTable(txtTuKhoa.getText(), id);
                 }
             }
-
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String txt = txtTuKhoa.getText();
@@ -112,7 +108,6 @@ public class DialogDetailOrder_GUI extends JDialog {
                     loadDataLenTable(txtTuKhoa.getText(), id);
                 }
             }
-
             @Override
             public void changedUpdate(DocumentEvent e) {
                 String txt = txtTuKhoa.getText();
@@ -129,7 +124,6 @@ public class DialogDetailOrder_GUI extends JDialog {
                 if (e.getClickCount() == 2) {
                     xuLyChonSach();
                 }
-
             }
             @Override
             public void mousePressed(MouseEvent e) {

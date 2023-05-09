@@ -25,6 +25,9 @@ public class login extends javax.swing.JFrame {
         initComponents();
         txtusername.setBackground(new java.awt.Color(0, 0, 0, 1));
         txtpassword.setBackground(new java.awt.Color(0, 0, 0, 1));
+        // do du lieu de test
+        txtusername.setText("admin123");
+        txtpassword.setText("12345");
         this.setVisible(true);
     }
 
@@ -38,6 +41,8 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnBG = new javax.swing.JPanel();
+        lbBg = new javax.swing.JLabel();
         pnFormLogin = new javax.swing.JPanel();
         lbExit = new javax.swing.JLabel();
         lbLogin = new javax.swing.JLabel();
@@ -53,8 +58,6 @@ public class login extends javax.swing.JFrame {
         show = new javax.swing.JLabel();
         lbFoget = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
-        pnBG = new javax.swing.JPanel();
-        lbBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,6 +67,27 @@ public class login extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        pnBG.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/bg1.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnBGLayout = new javax.swing.GroupLayout(pnBG);
+        pnBG.setLayout(pnBGLayout);
+        pnBGLayout.setHorizontalGroup(
+            pnBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnBGLayout.createSequentialGroup()
+                .addComponent(lbBg, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
+        pnBGLayout.setVerticalGroup(
+            pnBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnBGLayout.createSequentialGroup()
+                .addComponent(lbBg, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnBG);
 
         pnFormLogin.setBackground(new java.awt.Color(25, 118, 211));
 
@@ -95,6 +119,11 @@ public class login extends javax.swing.JFrame {
         txtusername.setFont(txtusername.getFont().deriveFont(txtusername.getFont().getSize()+2f));
         txtusername.setForeground(new java.awt.Color(255, 255, 255));
         txtusername.setBorder(null);
+        txtusername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtusernameKeyPressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("_________________________________________");
@@ -239,27 +268,6 @@ public class login extends javax.swing.JFrame {
 
         getContentPane().add(pnFormLogin);
 
-        pnBG.setBackground(new java.awt.Color(255, 255, 255));
-
-        lbBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/bg1.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnBGLayout = new javax.swing.GroupLayout(pnBG);
-        pnBG.setLayout(pnBGLayout);
-        pnBGLayout.setHorizontalGroup(
-            pnBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBGLayout.createSequentialGroup()
-                .addComponent(lbBg, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(426, 426, 426))
-        );
-        pnBGLayout.setVerticalGroup(
-            pnBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBGLayout.createSequentialGroup()
-                .addComponent(lbBg, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(pnBG);
-
         setSize(new java.awt.Dimension(916, 438));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -275,6 +283,13 @@ public class login extends javax.swing.JFrame {
             xuLyDangNhap();
         }
     }//GEN-LAST:event_txtpasswordKeyPressed
+
+    private void txtusernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            xuLyDangNhap();
+        }
+    }//GEN-LAST:event_txtusernameKeyPressed
 
     private void lbFogetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFogetMouseClicked
         // TODO add your handling code here:

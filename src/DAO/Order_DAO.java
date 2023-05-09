@@ -101,7 +101,7 @@ public class Order_DAO {
     public boolean updateOrder(Order_DTO o) {
         try {
             String sqlUpdate = "UPDATE `libarymanager`.`phieu_muontra`"
-                    + "\nSET \nid_the = ?, id_nv = ?, ngay_tao = ? , desc = ? , status = ? , ngay_tra = ?"
+                    + "\nSET \n `id_the` = ?, `id_nv` = ?, `ngay_tao` = ? , `desc` = ? , `status` = ? , `ngay_tra` = ?"
                     + "\nWHERE id = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
             pstmt.setInt(1, o.getCard_id());

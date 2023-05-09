@@ -260,6 +260,7 @@ public class DialogCreateOrder_GUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addNewOrder();
+                setVisible(false);
             }
         });
 

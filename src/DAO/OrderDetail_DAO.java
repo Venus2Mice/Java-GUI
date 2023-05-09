@@ -12,8 +12,8 @@ import DTO.OrderDetail_DTO;
 public class OrderDetail_DAO {
 
     public List<OrderDetail_DTO> getAllDetailByID(int id_order) {
-        List<OrderDetail_DTO> Publist;
-        Publist = new ArrayList<OrderDetail_DTO>();
+        List<OrderDetail_DTO> detailList;
+        detailList = new ArrayList<OrderDetail_DTO>();
         try {
             String sqlQuery = "SELECT * FROM `libarymanager`.`chi_tiet_muontra` WHERE `id_muontra` = ? ";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlQuery);
@@ -23,12 +23,31 @@ public class OrderDetail_DAO {
                 OrderDetail_DTO p = new OrderDetail_DTO();
                 p.setId_order(rs.getInt("id_muontra"));
                 p.setIsbn_book(rs.getString("isbn_book"));
-                Publist.add(p);
+                detailList.add(p);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return Publist;
+        return detailList;
+    }
+
+    public List<OrderDetail_DTO> getAllDetail() {
+        List<OrderDetail_DTO> detailList;
+        detailList = new ArrayList<OrderDetail_DTO>();
+        try {
+            String sqlQuery = "SELECT * FROM `libarymanager`.`chi_tiet_muontra`";
+            PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlQuery);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                OrderDetail_DTO p = new OrderDetail_DTO();
+                p.setId_order(rs.getInt("id_muontra"));
+                p.setIsbn_book(rs.getString("isbn_book"));
+                detailList.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return detailList;
     }
 
     public OrderDetail_DTO getDetailByIdAndIsbn(String isbn, int id) {

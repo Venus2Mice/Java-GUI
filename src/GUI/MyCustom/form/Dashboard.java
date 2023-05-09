@@ -4,34 +4,66 @@ import GUI.MyCustom.model.Model_Card;
 import GUI.MyCustom.model.StatusType;
 import GUI.MyCustom.swing.ScrollBar;
 import java.awt.Color;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import java.util.*;
+import javax.swing.*;
+
+import BUS.Book_BUS;
+import BUS.OrderDetail_BUS;
+import BUS.Staff_BUS;
+import DTO.Book_DTO;
+import DTO.OrderDetail_DTO;
+import DTO.Staff_DTO;
 
 public class Dashboard extends javax.swing.JPanel {
 
     public Dashboard() {
         initComponents();
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/GUI/MyCustom/icon/stock.png")), "Sách đang mượn", "15"));
-        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/GUI/MyCustom/icon/profit.png")), "Sách quá hạn trả", "0"));
-        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/GUI/MyCustom/icon/flag.png")), "Nhân viên đang trong ca", "tao"));
-        //  add row table
+        Staff_DTO s = Staff_BUS.staff_DTO_current_login;
+        Book_BUS book_BUS = new Book_BUS();
+        int total_book = 0;
+        for (Book_DTO book_DTO : book_BUS.getAllBook()) {
+            total_book += book_DTO.getAmount();
+        }
+
+        List<Book_DTO> listRank = book_BUS.getAllBook();
+        HashMap<String, Integer> rank = new HashMap<String, Integer>();
+
+        // init rank
+        for (Book_DTO book_DTO : listRank) {
+            rank.put(book_DTO.getIsbn_code(), 0);
+        }
+
+        OrderDetail_BUS orderDetail_BUS = new OrderDetail_BUS();
+        for (OrderDetail_DTO orderDetail_DTO : orderDetail_BUS.getAllDetail()) {
+            rank.replace(orderDetail_DTO.getIsbn_book(), rank.get(orderDetail_DTO.getIsbn_book())+1);
+        }
+
+        
+
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/GUI/MyCustom/icon/stock.png")),
+                "Tổng số sách trong kho", total_book + ""));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/GUI/MyCustom/icon/profit.png")),
+                "Sách quá hạn trả", "0"));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/GUI/MyCustom/icon/flag.png")),
+                "Nhân viên đang trong ca", s.getStaff_name()));
+        // add row table
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        table.addRow(new Object[]{"1", "Trần Khoa", "21/10/2003", "1800 6886", StatusType.WORK});
-        table.addRow(new Object[]{"2", "Tên gì đó", "xx/xx/xxxx", "113", StatusType.HOME});
-        table.addRow(new Object[]{"3", "Tên gì đó 12", "xx/xx/xxxx", "113", StatusType.HOME});
-        table.addRow(new Object[]{"4", "Tên gì đó 34", "yy/yy/yyyy", "1234567789", StatusType.HOME});
-        table.addRow(new Object[]{"5", "Tên gì đó 56", "zz/zz/zzzz", "0123412341", StatusType.WORK});
-        
+        table.addRow(new Object[] { "1", "Trần Khoa", "21/10/2003", "1800 6886", StatusType.WORK });
+        table.addRow(new Object[] { "2", "Tên gì đó", "xx/xx/xxxx", "113", StatusType.HOME });
+        table.addRow(new Object[] { "3", "Tên gì đó 12", "xx/xx/xxxx", "113", StatusType.HOME });
+        table.addRow(new Object[] { "4", "Tên gì đó 34", "yy/yy/yyyy", "1234567789", StatusType.HOME });
+        table.addRow(new Object[] { "5", "Tên gì đó 56", "zz/zz/zzzz", "0123412341", StatusType.WORK });
+
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnCardView = new javax.swing.JLayeredPane();
@@ -71,19 +103,18 @@ public class Dashboard extends javax.swing.JPanel {
         spTable.setBorder(null);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "ID", "Tên", "Ngày sinh", "SDT", "Trạng thái"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                },
+                new String[] {
+                        "ID", "Tên", "Ngày sinh", "SDT", "Trạng thái"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         spTable.setViewportView(table);
@@ -93,25 +124,26 @@ public class Dashboard extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnCardView, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
-                    .addComponent(pnTableRate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(pnCardView, javax.swing.GroupLayout.DEFAULT_SIZE, 875,
+                                                Short.MAX_VALUE)
+                                        .addComponent(pnTableRate, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(20, 20, 20)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(pnCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnTableRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(pnCardView, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnTableRate, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(80, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.MyCustom.component.Card card1;

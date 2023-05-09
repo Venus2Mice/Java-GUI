@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 
 import DTO.Order_DTO;
 import GUI.MyCustom.MyTable;
@@ -44,8 +45,8 @@ public class Order_GUI extends javax.swing.JPanel {
     final Color colorPanel = new Color(247, 247, 247);
     public static JButton btnReset;
     private JButton btnAdd, btnDel, btnSearch , btnDetail , btnUpdate;
-    private JTextField txtSearch, txtID , txtIDStaff, txtIDLibCard, txtDayinit;
-    private DateChooser datyInit;
+    private JTextField txtSearch, txtID , txtIDStaff, txtIDLibCard, txtDayinit , txtDesc, txtDayreturn;
+    private DateChooser datyInit, dayReturn;
     private JCheckBox ckStatus;
 
     private void addControl() {
@@ -72,18 +73,22 @@ public class Order_GUI extends javax.swing.JPanel {
         JPanel pnTextFiledRight = new TransparentPanel();
         pnTextFiledRight.setLayout(new BoxLayout(pnTextFiledRight, BoxLayout.Y_AXIS));
 
-        JLabel lbID, lbIDStaff, lbIDLibCard , lbDayinit , lbStatus;
+        JLabel lbID, lbIDStaff, lbIDLibCard , lbDayinit , lbStatus, lbDesc , lbDayReturn;
         lbID = new JLabel("ID");
         lbIDStaff = new JLabel("ID NV");
         lbIDLibCard = new JLabel("ID THẺ THƯ VIỆN");
         lbDayinit = new JLabel("NGÀY TẠO");
-        lbStatus = new JLabel("NGÀY TRẢ");
+        lbStatus = new JLabel("TRẠNG THÁI");
+        lbDesc = new JLabel("Ghi chú");
+        lbDayReturn = new JLabel("NGÀY TRẢ");
 
         lbID.setFont(font);
         lbIDStaff.setFont(font);
         lbIDLibCard.setFont(font);
         lbDayinit.setFont(font);
         lbStatus.setFont(font);
+        lbDesc.setFont(font);
+        lbDayReturn.setFont(font);
 
         txtID = new JTextField(15);
         txtID.setEditable(false);
@@ -91,6 +96,9 @@ public class Order_GUI extends javax.swing.JPanel {
         txtIDStaff.setEditable(false);
         txtIDLibCard = new JTextField(15);
         txtDayinit = new JTextField(15);
+        txtDesc = new JTextField(15);
+        txtDesc.setPreferredSize(new Dimension(60, 80));
+        txtDayreturn = new JTextField(15);
 
         ckStatus = new JCheckBox();
 
@@ -98,30 +106,46 @@ public class Order_GUI extends javax.swing.JPanel {
         txtIDStaff.setFont(font);
         txtIDLibCard.setFont(font);
         txtDayinit.setFont(font);
+        txtDesc.setFont(font);
+        txtDayreturn.setFont(font);
 
         datyInit = new DateChooser();
         datyInit.setDateFormat("yyyy-MM-dd");
         datyInit.setTextRefernce(txtDayinit);
 
+        dayReturn = new DateChooser();
+        dayReturn.setDateFormat("yyyy-MM-dd");
+        dayReturn.setTextRefernce(txtDayreturn);
+
         JPanel pnID = new TransparentPanel();
         pnID.add(lbID);
         pnID.add(txtID);
-        pnTextFiledRight.add(pnID);
+        pnTextFiledLeft.add(pnID);
 
         JPanel pnIDStaff = new TransparentPanel();
         pnIDStaff.add(lbIDStaff);
         pnIDStaff.add(txtIDStaff);
-        pnTextFiledRight.add(pnIDStaff);
+        pnTextFiledLeft.add(pnIDStaff);
 
         JPanel pnIdLibCard = new TransparentPanel();
         pnIdLibCard.add(lbIDLibCard);
         pnIdLibCard.add(txtIDLibCard);
         pnTextFiledLeft.add(pnIdLibCard);
 
+        JPanel pnDesc = new TransparentPanel();
+        pnDesc.add(lbDesc);
+        pnDesc.add(txtDesc);
+        pnTextFiledLeft.add(pnDesc);
+
+        JPanel pnDayReturn = new TransparentPanel();
+        pnDayReturn.add(lbDayReturn);
+        pnDayReturn.add(txtDayreturn);
+        pnTextFiledRight.add(pnDayReturn);
+
         JPanel pnDayInit = new TransparentPanel();
         pnDayInit.add(lbDayinit);
         pnDayInit.add(txtDayinit);
-        pnTextFiledLeft.add(pnDayInit);
+        pnTextFiledRight.add(pnDayInit);
 
         JPanel pnCkStatus = new TransparentPanel();
         pnCkStatus.add(lbStatus);
@@ -134,6 +158,8 @@ public class Order_GUI extends javax.swing.JPanel {
         lbIDLibCard.setPreferredSize(lbSize);
         lbDayinit.setPreferredSize(lbSize);
         lbStatus.setPreferredSize(lbSize);
+        lbDesc.setPreferredSize(lbSize);
+        lbDayReturn.setPreferredSize(lbSize);
         
         pnTop.add(pnTextFiledLeft, BorderLayout.WEST);
         pnTop.add(pnTextFiledRight, BorderLayout.EAST);
@@ -182,6 +208,9 @@ public class Order_GUI extends javax.swing.JPanel {
         dtmOrder.addColumn("MÃ THẺ");
         dtmOrder.addColumn("MÃ NHÂN VIÊN");
         dtmOrder.addColumn("NGÀY TẠO");
+        dtmOrder.addColumn("NGÀY TRẢ");
+        dtmOrder.addColumn("GHI CHÚ");
+        dtmOrder.addColumn("TRẠNG THÁI");
 
         tbOrder = new MyTable(dtmOrder);
 
@@ -194,8 +223,8 @@ public class Order_GUI extends javax.swing.JPanel {
     }
 
     private void addEvent() {
+        
         btnReset.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadData();
@@ -203,6 +232,9 @@ public class Order_GUI extends javax.swing.JPanel {
                 txtIDStaff.setText("");
                 txtIDLibCard.setText("");
                 txtDayinit.setText("");
+                txtDayreturn.setText("");
+                txtDesc.setText("");
+                ckStatus.setSelected(false);
             }
         });
 
@@ -268,6 +300,14 @@ public class Order_GUI extends javax.swing.JPanel {
                     new DialogDetailOrder_GUI(Integer.parseInt(txt));
             }
         });
+
+        btnUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eUpdate();
+            }
+        });
+        
     }
 
     private void loadData() {
@@ -283,6 +323,10 @@ public class Order_GUI extends javax.swing.JPanel {
             vec.add(o.getCard_id());
             vec.add(o.getStaff_id());
             vec.add(o.getDay_init());
+            vec.add(o.getDay_return());
+            vec.add(o.getDesc());
+            vec.add(o.isStatus());
+        
             dtmOrder.addRow(vec);
         }
     }
@@ -294,6 +338,10 @@ public class Order_GUI extends javax.swing.JPanel {
             txtIDLibCard.setText(tbOrder.getValueAt(row, 1) + "");
             txtIDStaff.setText(tbOrder.getValueAt(row, 2) + "");
             txtDayinit.setText(tbOrder.getValueAt(row, 3) + "");
+            txtDayreturn.setText(tbOrder.getValueAt(row, 4) + "");
+            txtDesc.setText(tbOrder.getValueAt(row, 5) + "");
+            Boolean b = Boolean.parseBoolean((tbOrder.getValueAt(row, 6))+"") ;
+            ckStatus.setSelected(b);
         }
     }
 
@@ -303,6 +351,17 @@ public class Order_GUI extends javax.swing.JPanel {
     }
 
     private void eUpdate(){
+        int id_order = Integer.parseInt(txtID.getText());
+        int id_card = Integer.parseInt(txtIDLibCard.getText());
+        int id_staff = Integer.parseInt(txtIDStaff.getText());
+        Date dayInit = Date.valueOf(txtDayinit.getText());
+        String desc = txtDesc.getText();
+        boolean status = ckStatus.isSelected();
+        Date dayReturn = Date.valueOf(txtDayreturn.getText());
+
+        Order_DTO o = new Order_DTO(id_order, id_card, id_staff, dayInit, desc, dayReturn, status);
+        order_BUS.updateOrder(o);
+        
         btnReset.doClick();
     }
 

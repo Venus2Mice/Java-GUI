@@ -15,6 +15,21 @@ public class Order_DTO {
         return order_id;
     }
 
+    public Order_DTO(int order_id, int card_id, int staff_id, Date day_init, String desc, Date day_return,
+            boolean status) {
+        this.order_id = order_id;
+        this.card_id = card_id;
+        this.staff_id = staff_id;
+        this.day_init = day_init;
+        this.desc = desc;
+        this.day_return = day_return;
+        this.status = status;
+    }
+
+    public Order_DTO() {
+
+    }
+
     public void setOrder_id(int order_id) {
         this.order_id = order_id;
     }

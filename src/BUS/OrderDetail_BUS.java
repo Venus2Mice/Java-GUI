@@ -17,6 +17,10 @@ public class OrderDetail_BUS {
         return orderDetail_DAO.getAllDetailByID(id_order);
     }
 
+    public List<OrderDetail_DTO> getAllDetail() {
+        return orderDetail_DAO.getAllDetail();
+    }
+
     public boolean addBookIntoOrder(String isbn_book, int id_order) {
         if (isbn_book == null || id_order < 0) {
             new MyDialog("Thêm thất bại!", MyDialog.ERROR_DIALOG);
@@ -27,7 +31,6 @@ public class OrderDetail_BUS {
             new MyDialog("Thêm thất bại!", MyDialog.ERROR_DIALOG);
             return false;
         } else {
-            new MyDialog("Thêm thành công!", MyDialog.SUCCESS_DIALOG);
             return orderDetail_DAO.addBookIntoDetail(id_order, isbn_book);
         }
     }
