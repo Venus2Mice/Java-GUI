@@ -4,9 +4,10 @@ import BUS.Staff_BUS;
 import DTO.Staff_DTO;
 import GUI.MyCustom.MyTable;
 import GUI.MyCustom.datechooser.DateChooser;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Staff_GUI extends javax.swing.JPanel {
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     public Staff_GUI() {
         initComponents();
     }
@@ -237,19 +239,74 @@ public class Staff_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
-        // TODO add your handling code here:
+        try {
+            String ten = txtName.getFieldText();
+            String birth = txtBirth.getText(); 
+            String phone  = txtPhone.getFieldText();
+            String group = cmbGroup.getSelectedItem().toString();
+            String username = txtUsername.getFieldText();
+            String password = txtPassword.getFieldText();
+            boolean status = true;
+        
+            java.util.Date utilBirthDate = format.parse(birth);
+            java.sql.Date sqlBirthDate = new java.sql.Date(utilBirthDate.getDate());
+        
+            Staff_DTO s = staff_BUS.initStaff(ten, sqlBirthDate, phone, group, username, password, status);
+            if (staff_BUS.updateStaff(s)) {
+                btnReset.doClick();
+            }
+        } catch (ParseException e) {
+        }
     }//GEN-LAST:event_SuaActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
-        // TODO add your handling code here:
+        try {
+            String ten = txtName.getFieldText();
+            String birth = txtBirth.getText(); 
+            String phone  = txtPhone.getFieldText();
+            String group = cmbGroup.getSelectedItem().toString();
+            String username = txtUsername.getFieldText();
+            String password = txtPassword.getFieldText();
+            boolean status = true;
+        
+            java.util.Date utilBirthDate = format.parse(birth);
+            java.sql.Date sqlBirthDate = new java.sql.Date(utilBirthDate.getDate());
+        
+            Staff_DTO s = staff_BUS.initStaff(ten, sqlBirthDate, phone, group, username, password, status);
+            if (staff_BUS.deleteStaff(s)) {
+                btnReset.doClick();
+            }
+        } catch (ParseException e) {
+        }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        txtName.setFieldText("");
+        txtBirth.setText("");
+        txtPhone.setFieldText("");
+        txtUsername.setFieldText("");
+        txtPassword.setFieldText("");
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
-        // TODO add your handling code here:
+        try {
+            String ten = txtName.getFieldText();
+            String birth = txtBirth.getText(); 
+            String phone  = txtPhone.getFieldText();
+            String group = cmbGroup.getSelectedItem().toString();
+            String username = txtUsername.getFieldText();
+            String password = txtPassword.getFieldText();
+            boolean status = true;
+            
+            java.sql.Date sqlBirthDate2 = java.sql.Date.valueOf(birth);
+        
+            Staff_DTO s = staff_BUS.initStaff(ten, sqlBirthDate2, phone, group, username, password, status);
+            if (staff_BUS.addStaff(s)) {
+                System.out.println("added to database GUI"); // TODO: delete this line later
+                btnReset.doClick();
+            }
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_ThemActionPerformed
 
     private void TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimActionPerformed

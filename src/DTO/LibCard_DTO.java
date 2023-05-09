@@ -7,7 +7,7 @@ public class LibCard_DTO {
     private Date day_init;
     private Date exp_date;
     private String name;
-    private int phone;
+    private String phone;
     private String desc;
 
     public String getDesc() {
@@ -50,11 +50,11 @@ public class LibCard_DTO {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

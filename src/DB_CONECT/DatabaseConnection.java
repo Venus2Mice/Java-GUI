@@ -9,7 +9,7 @@ public class DatabaseConnection {
 
     private static DatabaseConnection instance;
     private Connection connection;
-    private static String DB_URL = "jdbc:mysql://localhost:3306/libarymanager";
+    private static String DB_URL = "jdbc:mysql://localhost:3307/libarymanager";
     private static String USER_NAME = "root";
     private static String PASSWORD = "";
 

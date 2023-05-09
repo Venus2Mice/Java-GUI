@@ -23,12 +23,12 @@ public class LibCard_DAO {
                 c.setDay_init(rs.getDate("ngay_tao"));
                 c.setExp_date(rs.getDate("ngay_hethan"));
                 c.setName(rs.getString("ten_docgia"));
-                c.setPhone(rs.getInt("phone"));
+                c.setPhone(rs.getString("phone"));
                 c.setDesc(rs.getString("desc"));
                 LibCardlist.add(c);
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Error executing SQL Query: " + ex.getMessage());
         }
         return LibCardlist;
     }
@@ -41,7 +41,7 @@ public class LibCard_DAO {
             pstmt.setDate(2, c.getExp_date());
             pstmt.setString(3, c.getDesc());
             pstmt.setString(4, c.getName());
-            pstmt.setInt(5, c.getPhone());
+            pstmt.setString(5, c.getPhone());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -76,7 +76,7 @@ public class LibCard_DAO {
             pstmt.setDate(2, c.getExp_date());
             pstmt.setString(3, c.getDesc());
             pstmt.setString(4, c.getName());
-            pstmt.setInt(5, c.getPhone());
+            pstmt.setString(5, c.getPhone());
             pstmt.setInt(6, c.getCard_id());
             if (pstmt.executeUpdate() >= 1) {
                 return true;
@@ -102,7 +102,7 @@ public class LibCard_DAO {
                 c.setDay_init(rs.getDate("ngay_tao"));
                 c.setExp_date(rs.getDate("ngay_hethan"));
                 c.setName(rs.getString("ten_docgia"));
-                c.setPhone(rs.getInt("phone"));
+                c.setPhone(rs.getString("phone"));
                 c.setDesc(rs.getString("desc"));
             }
 

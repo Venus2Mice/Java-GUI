@@ -13,16 +13,18 @@ public class Staff_DAO {
 
     public boolean addStaff(Staff_DTO s) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`nhan_vien` VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`nhan_vien` VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setString(1, s.getStaff_name());
-            pstmt.setDate(2, s.getBrith());
-            pstmt.setString(3, s.getPhone());
-            pstmt.setString(4, s.getGroup_name());
-            pstmt.setString(5, s.getUsername());
-            pstmt.setString(6, s.getPassword());
-            pstmt.setBoolean(7, s.isActive());
+            pstmt.setInt(1, s.getId_staff());
+            pstmt.setString(2, s.getStaff_name());
+            pstmt.setDate(3, s.getBrith());
+            pstmt.setString(4, s.getPhone());
+            pstmt.setString(5, s.getGroup_name());
+            pstmt.setString(6, s.getUsername());
+            pstmt.setString(7, s.getPassword());
+            pstmt.setBoolean(8, s.isActive());
             if (pstmt.executeUpdate() >= 1) {
+                System.out.println("added to database DAO"); // debug 101
                 return true;
             }
         } catch (SQLException ex) {
