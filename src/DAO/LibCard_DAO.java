@@ -35,7 +35,7 @@ public class LibCard_DAO {
 
     public boolean addLibCard(LibCard_DTO c) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`the_thuvien` VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`the_thuvien` (`ngay_tao`, `ngay_hethan`, `desc`, `ten_docgia`, `phone`) VALUES(?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
             pstmt.setDate(1, c.getDay_init());
             pstmt.setDate(2, c.getExp_date());
@@ -51,12 +51,12 @@ public class LibCard_DAO {
         return false;
     }
 
-    public boolean deleteLibCard(LibCard_DTO c) {
+    public boolean deleteLibCard(int id) {
         try {
             String sqlUpdate = "DELETE FROM `libarymanager`.`the_thuvien`"
                     + "\nWHERE id_the = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
-            pstmt.setInt(1, c.getCard_id());
+            pstmt.setInt(1, id);
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -69,7 +69,7 @@ public class LibCard_DAO {
     public boolean updateLibCard(LibCard_DTO c) {
         try {
             String sqlUpdate = "UPDATE `libarymanager`.`the_thuvien`"
-                    + "\nSET \n ngay_tao = ?, ngay_hethan = ?, desc = ?, ten_docgia = ?, phone = ?"
+                    + "\nSET \n `ngay_tao` = ?, `ngay_hethan` = ?, `desc` = ?, `ten_docgia` = ?, `phone` = ?"
                     + "\nWHERE id_the = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
             pstmt.setDate(1, c.getDay_init());

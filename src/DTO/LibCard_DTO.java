@@ -10,6 +10,18 @@ public class LibCard_DTO {
     private String phone;
     private String desc;
 
+    public LibCard_DTO(int card_id, Date day_init, Date exp_date, String name, String phone, String desc) {
+        this.card_id = card_id;
+        this.day_init = day_init;
+        this.exp_date = exp_date;
+        this.name = name;
+        this.phone = phone;
+        this.desc = desc;
+    }
+
+    public LibCard_DTO() {
+    }
+
     public String getDesc() {
         return desc;
     }

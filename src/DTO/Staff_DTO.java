@@ -12,6 +12,21 @@ public class Staff_DTO {
     private String group_name;
     private boolean active;
 
+    public Staff_DTO() {
+    }
+
+    public Staff_DTO(int id_staff, String staff_name, Date brith, String phone, String username, String password,
+            String group_name, boolean active) {
+        this.id_staff = id_staff;
+        this.staff_name = staff_name;
+        this.brith = brith;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+        this.group_name = group_name;
+        this.active = active;
+    }
+
     public boolean isActive() {
         return active;
     }

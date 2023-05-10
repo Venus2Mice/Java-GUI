@@ -13,16 +13,15 @@ public class Staff_DAO {
 
     public boolean addStaff(Staff_DTO s) {
         try {
-            String sql = "INSERT INTO `libarymanager`.`nhan_vien` VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `libarymanager`.`nhan_vien` (`ten_nv`,`ngay_sinh`,`phone`,`ten_nhom`,`username`,`password`,`status`) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sql);
-            pstmt.setInt(1, s.getId_staff());
-            pstmt.setString(2, s.getStaff_name());
-            pstmt.setDate(3, s.getBrith());
-            pstmt.setString(4, s.getPhone());
-            pstmt.setString(5, s.getGroup_name());
-            pstmt.setString(6, s.getUsername());
-            pstmt.setString(7, s.getPassword());
-            pstmt.setBoolean(8, s.isActive());
+            pstmt.setString(1, s.getStaff_name());
+            pstmt.setDate(2, s.getBrith());
+            pstmt.setString(3, s.getPhone());
+            pstmt.setString(4, s.getGroup_name());
+            pstmt.setString(5, s.getUsername());
+            pstmt.setString(6, s.getPassword());
+            pstmt.setBoolean(7, s.isActive());
             if (pstmt.executeUpdate() >= 1) {
                 System.out.println("added to database DAO"); // debug 101
                 return true;
@@ -34,12 +33,12 @@ public class Staff_DAO {
     }
 
 
-    public boolean deleteStaff(Staff_DTO s) {
+    public boolean deleteStaff(int id) {
         try {
             String sqlUpdate = "DELETE FROM `libarymanager`.`nhan_vien`"
                     + "\nWHERE id_nv = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);
-            pstmt.setInt(1, s.getId_staff());
+            pstmt.setInt(1, id);
             if (pstmt.executeUpdate() >= 1) {
                 return true;
             }
@@ -88,7 +87,7 @@ public class Staff_DAO {
                 check = true;
                 s.setId_staff(rs.getInt("id_nv"));
                 s.setStaff_name(rs.getString("ten_nv"));
-                s.setBrith(rs.getDate("BIRTH"));
+                s.setBrith(rs.getDate("ngay_sinh"));
                 s.setPhone(rs.getString("phone"));
                 s.setGroup_name(rs.getString("ten_nhom"));
                 s.setUsername(rs.getString("username"));
@@ -139,7 +138,7 @@ public class Staff_DAO {
     public boolean updateStaff(Staff_DTO s) {
         try {
             String sqlUpdate = "UPDATE `libarymanager`.`nhan_vien`"
-                    + "\nSET \nten_nv = ?, BIRTH = ?, phone = ?,"
+                    + "\nSET \nten_nv = ?, ngay_sinh = ?, phone = ?,"
                     + "ten_nhom = ?, username = ?, password = ?, status = ?"
                     + "\nWHERE id_nv = ?";
             PreparedStatement pstmt = DatabaseConnection.getInstance().getConnection().prepareStatement(sqlUpdate);

@@ -1,5 +1,6 @@
 package BUS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DAO.LibCard_DAO;
@@ -18,18 +19,32 @@ public class LibCard_BUS {
         return libCard_DAO.getAllLibCard();
     }
 
-    public boolean addStaff(LibCard_DTO c) {
-        if (c == null)
+    public boolean addLibCard(LibCard_DTO l) {
+        if (l.getDay_init() == null || l.getExp_date() == null) {
+            new MyDialog("Không để trống ngày trả", MyDialog.ERROR_DIALOG);
             return false;
-        int id = c.getCard_id();
+        }
+        Date dayinit = l.getDay_init();
+        Date day_exp = l.getExp_date();
+        int cp = dayinit.compareTo(day_exp);
+        if (cp == 0) {
+            new MyDialog("Lỗi ngày hết hạn cùng ngày tạo", MyDialog.ERROR_DIALOG);
+            return false;
+        }
+        if (cp > 0) {
+            new MyDialog("Lỗi ngày hết hạn sau ngày tạo", MyDialog.ERROR_DIALOG);
+            return false;
+        }
+
+        int id = l.getCard_id();
         LibCard_DTO tmp = libCard_DAO.getLibCardById(id);
         if (tmp != null) {
             return false;
         } else {
-            return libCard_DAO.addLibCard(c);
+            return l != null ? libCard_DAO.addLibCard(l) : false;
         }
     }
-    
+
     public LibCard_DTO initLibCard(Date start, Date expire, String desc, String name, String phone) {
         if (name.trim().equals("")) {
             new MyDialog("Vui lòng điền đầy đủ thông tin!", MyDialog.ERROR_DIALOG);
@@ -43,36 +58,50 @@ public class LibCard_BUS {
         libcard.setPhone(phone);
         return libcard;
     }
-    
-    public boolean addLibCard(LibCard_DTO l) {
-        if (l == null) {
-            new MyDialog("Thêm thất bại!", MyDialog.ERROR_DIALOG);
-            return false;
+
+    public boolean deleteLibCard(int id) {
+        int action = new MyDialog("Xóa ?", MyDialog.WARNING_DIALOG).getAction();
+        if (action == 1) {
+            new MyDialog("Xóa thành công ", MyDialog.SUCCESS_DIALOG);
+            return libCard_DAO.deleteLibCard(id);
         }
-        return libCard_DAO.addLibCard(l);   
-    }
-    
-    public boolean deleteLibCard(LibCard_DTO l) {
-        if (l == null) {
-            new MyDialog("Thêm thất bại!", MyDialog.ERROR_DIALOG);
-            return false;
-        }
-        return libCard_DAO.deleteLibCard(l);
-    }
-    
-    public boolean updateLibCard(LibCard_DTO l) {
-        if (l == null) {
-            new MyDialog("Thêm thất bại!", MyDialog.ERROR_DIALOG);
-            return false;
-        }
-        return libCard_DAO.updateLibCard(l);
-    }
-    public boolean updateStaff(LibCard_DTO c) {
-        return c != null ? libCard_DAO.updateLibCard(c) : false;
+        return false;
     }
 
-    public boolean deleteStaff(LibCard_DTO c) {
-        return c != null ? libCard_DAO.deleteLibCard(c) : false;
+    public boolean updateLibCard(LibCard_DTO l) {
+        if (l.getDay_init() == null || l.getExp_date() == null) {
+            new MyDialog("Không để trống ngày trả", MyDialog.ERROR_DIALOG);
+            return false;
+        }
+        Date dayinit = l.getDay_init();
+        Date day_exp = l.getExp_date();
+        int cp = dayinit.compareTo(day_exp);
+        if (cp == 0) {
+            new MyDialog("Lỗi ngày hết hạn cùng ngày tạo", MyDialog.ERROR_DIALOG);
+            return false;
+        }
+        if (cp > 0) {
+            new MyDialog("Lỗi ngày hết hạn sau ngày tạo", MyDialog.ERROR_DIALOG);
+            return false;
+        }
+        return l != null ? libCard_DAO.updateLibCard(l) : false;
+    }
+
+    public ArrayList<LibCard_DTO> findByKey(String key) {
+        ArrayList<LibCard_DTO> list = new ArrayList<>();
+        key = key.toLowerCase();
+        for (LibCard_DTO b : libCard_DAO.getAllLibCard()) {
+            String id = b.getCard_id() + "".toLowerCase();
+            String name = b.getName().toLowerCase();
+            String dayinit = b.getDay_init() + "".toLowerCase();
+            String day_exp = b.getExp_date() + "".toLowerCase();
+            String desc = b.getDesc().toLowerCase();
+            if (id.contains(key) || name.contains(key) || dayinit.contains(key) || day_exp.contains(key)
+                    || desc.contains(key)) {
+                list.add(b);
+            }
+        }
+        return list;
     }
 
 }

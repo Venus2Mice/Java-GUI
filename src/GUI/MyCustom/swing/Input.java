@@ -1,6 +1,8 @@
 
 package GUI.MyCustom.swing;
 
+import javax.swing.JTextField;
+
 public class Input extends javax.swing.JPanel {
 
 
@@ -17,6 +19,14 @@ public class Input extends javax.swing.JPanel {
     
     public String getFieldText() {
         return jTextField1.getText();
+    }
+    
+    public void setEditable(){
+        jTextField1.setEditable(false);
+    }
+    
+    public JTextField getTf(){
+        return jTextField1;
     }
     
     @SuppressWarnings("unchecked")
