@@ -15,7 +15,7 @@ public class LibCard_BUS {
         this.libCard_DAO = new LibCard_DAO();
     }
 
-    public List<LibCard_DTO> getAllStaff() {
+    public List<LibCard_DTO> getAllLibCard() {
         return libCard_DAO.getAllLibCard();
     }
 

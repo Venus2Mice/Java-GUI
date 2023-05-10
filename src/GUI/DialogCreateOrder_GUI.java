@@ -106,7 +106,7 @@ public class DialogCreateOrder_GUI extends JDialog {
 
         cmbLibCard = new JComboBox<>();
         cmbLibCard.addItem("Chọn tên độc giả");
-        for (LibCard_DTO c : libCard_BUS.getAllStaff()) {
+        for (LibCard_DTO c : libCard_BUS.getAllLibCard()) {
             cmbLibCard.addItem(c.getName());
         }
 
@@ -268,7 +268,7 @@ public class DialogCreateOrder_GUI extends JDialog {
 
     private void addNewOrder() {
         int id_card = -1;
-        for (LibCard_DTO libCard_DTO : libCard_BUS.getAllStaff()) {
+        for (LibCard_DTO libCard_DTO : libCard_BUS.getAllLibCard()) {
             if (libCard_DTO.getName().equals(cmbLibCard.getSelectedItem())) {
                 id_card = libCard_DTO.getCard_id();
             }

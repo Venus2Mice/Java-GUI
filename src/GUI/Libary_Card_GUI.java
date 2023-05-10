@@ -325,7 +325,7 @@ public class Libary_Card_GUI extends javax.swing.JPanel {
 
         private void loadData(){
         libcard_BUS = new LibCard_BUS();
-        loadData(libcard_BUS.getAllStaff());
+        loadData(libcard_BUS.getAllLibCard());
     }
 
     private void loadData(List<LibCard_DTO> listitem){
