@@ -121,4 +121,8 @@ public class Staff_BUS {
         return list;
     }
 
+    public Staff_DTO getbyID(int id){
+        return staff_DAO.getStaffById(id);
+    }
+
 }

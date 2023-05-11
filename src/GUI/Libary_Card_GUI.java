@@ -306,6 +306,7 @@ public class Libary_Card_GUI extends javax.swing.JPanel {
                 Reset.doClick();
             }
         } catch (ParseException e) {
+            
         }
     }//GEN-LAST:event_ThemActionPerformed
 

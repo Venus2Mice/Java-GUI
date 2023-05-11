@@ -160,7 +160,7 @@ public class Staff_GUI extends javax.swing.JPanel {
         lbBirth.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbBirth.setText("Ngày sinh");
 
-        btnLockStaff.setText("KHÓA NV");
+        btnLockStaff.setText("Lock / Unlock ");
         btnLockStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLockStaffMouseClicked(evt);
@@ -343,7 +343,11 @@ public class Staff_GUI extends javax.swing.JPanel {
 
     private void btnLockStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLockStaffMouseClicked
         int id = Integer.parseInt(txtID.getFieldText());
-        staff_BUS.setActive(id, false);
+        if(staff_BUS.getbyID(id).isActive())
+            staff_BUS.setActive(id, false);
+        else{
+            staff_BUS.setActive(id, true);
+        }
         btnReset.doClick();
     }//GEN-LAST:event_btnLockStaffMouseClicked
 

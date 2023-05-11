@@ -12,6 +12,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JComponent;
 
+import BUS.Role_BUS;
+import DTO.Role_DTO;
+
 public class MainManager extends javax.swing.JFrame {
 
     private Dashboard dashboard;
@@ -25,18 +28,26 @@ public class MainManager extends javax.swing.JFrame {
     public MainManager() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+        Role_DTO listquyen = Role_BUS.dsquyen;
         dashboard = new Dashboard();
+
         formNXB = new NXB_GUI();
+
         formBook = new Book_GUI();
+
         formStaff = new Staff_GUI();
+
         formOrder = new Order_GUI();
+
         formLibCard = new Libary_Card_GUI();
+
         pnContainer.add(dashboard,"1");
         pnContainer.add(formBook,"2");
         pnContainer.add(formNXB,"3");
-        pnContainer.add(formStaff,"4");
-        pnContainer.add(formLibCard,"5");
-        pnContainer.add(formOrder,"6");
+        pnContainer.add(formOrder,"4");
+        pnContainer.add(formStaff,"5");
+        pnContainer.add(formLibCard,"6");
+        
         pnMenu.initMoving(MainManager.this);
         pnMenu.addEventMenuSelected(new EventMenuSelected() {
             @Override

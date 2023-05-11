@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 08, 2023 lúc 04:37 PM
+-- Thời gian đã tạo: Th5 10, 2023 lúc 09:29 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -79,11 +79,26 @@ INSERT INTO `book` (`isbn`, `ten_sach`, `danh_muc`, `tac_gia`, `id_nxb`, `tai_ba
 
 CREATE TABLE `chi_tiet_muontra` (
   `id_muontra` int(11) NOT NULL,
-  `isbn_book` varchar(32) NOT NULL,
-  `desc` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `status` bit(1) NOT NULL DEFAULT b'0',
-  `ngay_tra` date DEFAULT NULL
+  `isbn_book` varchar(32) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_tiet_muontra`
+--
+
+INSERT INTO `chi_tiet_muontra` (`id_muontra`, `isbn_book`) VALUES
+(1, '978-604-314-544-1'),
+(1, '978-604-88-6796-6'),
+(14, '978-604-88-6796-6'),
+(15, '978-604-346-142-8'),
+(15, '978-604-356-499-0'),
+(15, '978-604-88-6796-6'),
+(16, '978-604-314-544-1'),
+(16, '978-604-346-142-8'),
+(16, '978-604-356-499-0'),
+(16, '978-604-88-6796-6'),
+(17, '978-604-346-142-8'),
+(17, '978-604-356-499-0');
 
 -- --------------------------------------------------------
 
@@ -110,7 +125,8 @@ INSERT INTO `nhan_vien` (`id_nv`, `ten_nv`, `ngay_sinh`, `phone`, `ten_nhom`, `u
 (1, 'Nguyễn Văn An', '2003-12-17', '0909999999', 'ADMIN', 'admin123', '12345', b'1'),
 (2, 'Trần Ngọc Bình', '2001-08-22', '0909999999', 'STAFF', 'binh123', '12345', b'1'),
 (3, 'Phan Anh Vũ', '1996-10-10', '0909999999', 'STAFF', 'vu123', '12345', b'1'),
-(4, 'Hồ Thị Vui', '2001-11-11', '0909999999', 'NV_KHO', 'vui123', '12345', b'1');
+(4, 'Hồ Thị Vui', '2001-11-11', '0999999999', 'NV_KHO', 'vui123', '12345', b'1'),
+(5, 'Luân Nguyễn ', '2023-05-23', '123456789', 'ADMIN', 'Luan12345', '123456', b'1');
 
 -- --------------------------------------------------------
 
@@ -147,8 +163,21 @@ CREATE TABLE `phieu_muontra` (
   `id` int(11) NOT NULL,
   `id_the` int(11) NOT NULL,
   `id_nv` int(11) NOT NULL,
-  `ngay_tao` date NOT NULL
+  `ngay_tao` date NOT NULL,
+  `desc` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL DEFAULT b'0',
+  `ngay_tra` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `phieu_muontra`
+--
+
+INSERT INTO `phieu_muontra` (`id`, `id_the`, `id_nv`, `ngay_tao`, `desc`, `status`, `ngay_tra`) VALUES
+(1, 1, 2, '2023-05-19', 'ok', b'1', '2023-05-20'),
+(14, 3, 1, '2023-05-09', 'ok', b'1', '2023-05-19'),
+(17, 1, 1, '2023-05-10', 'test', b'1', '2023-05-18'),
+(16, 1, 1, '2023-05-10', 'test', b'1', '2023-05-11');
 
 -- --------------------------------------------------------
 
@@ -195,8 +224,10 @@ CREATE TABLE `the_thuvien` (
 --
 
 INSERT INTO `the_thuvien` (`id_the`, `ngay_tao`, `ngay_hethan`, `desc`, `ten_docgia`, `phone`) VALUES
-(1, '2023-05-08', '2023-11-16', 'nothing', 'Nguyễn Hoàng Luân', '09999999'),
-(3, '2023-05-08', '2023-09-05', 'abcdfrg', 'Luân Nguyễn', '0916523548');
+(1, '2023-05-08', '2023-11-16', 'ok', 'Nguyễn Hoàng Luân', '09999999'),
+(3, '2023-05-08', '2023-09-05', 'thoing', 'Luân Nguyễn', '09999999'),
+(6, '2023-05-10', '2023-05-11', 'nothing', 'Trúc Anh Đài', '09999999'),
+(8, '2023-05-10', '2023-05-11', 'nothing', 'Lưu Sơn Bá', '093309099');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -266,7 +297,7 @@ ALTER TABLE `the_thuvien`
 -- AUTO_INCREMENT cho bảng `nhan_vien`
 --
 ALTER TABLE `nhan_vien`
-  MODIFY `id_nv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_nv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `nxb`
@@ -278,7 +309,7 @@ ALTER TABLE `nxb`
 -- AUTO_INCREMENT cho bảng `phieu_muontra`
 --
 ALTER TABLE `phieu_muontra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `quyen`
@@ -290,7 +321,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT cho bảng `the_thuvien`
 --
 ALTER TABLE `the_thuvien`
-  MODIFY `id_the` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_the` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

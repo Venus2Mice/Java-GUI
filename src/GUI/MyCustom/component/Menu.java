@@ -39,12 +39,13 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("2", "Sách", Model_Menu.MenuType.MENU));
         if(listquyen.isCrud_nxb())
             listMenu1.addItem(new Model_Menu("3", "Nhà Xuất Bản", Model_Menu.MenuType.MENU));
-        if(listquyen.isCrud_user())
-            listMenu1.addItem(new Model_Menu("4", "Nhân viên", Model_Menu.MenuType.MENU));
-        if(listquyen.isCrud_cardlib())
-            listMenu1.addItem(new Model_Menu("5", "Thẻ thư viện", Model_Menu.MenuType.MENU));
         if(listquyen.isCrud_orders())
-            listMenu1.addItem(new Model_Menu("6", "Ql phiếu mượn trả", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("4", "Ql phiếu mượn trả", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_user())
+            listMenu1.addItem(new Model_Menu("5", "Nhân viên", Model_Menu.MenuType.MENU));
+        if(listquyen.isCrud_cardlib())
+            listMenu1.addItem(new Model_Menu("6", "Thẻ thư viện", Model_Menu.MenuType.MENU));
+
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
